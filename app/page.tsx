@@ -8,7 +8,7 @@ import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useState } from "react"
 
 export default function Home() {
-  // const [scrollY, setScrollY] = useState(0)
+  //const [scrollY, setScrollY] = useState(0)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -36,20 +36,20 @@ export default function Home() {
 
   const features = [
     {
-      title: "Transform Your Skills with Personalized Mentorship and Real-World Projects",
-      description: "Our program emphasizes practical experience to ensure mastery of CS concepts.",
+      title: "Transform Your Skills with Personalized Mentorship and Real-World Projects ",
+      description: "Our program emphasizes practical experience to ensure mastery of technology and business fundamentals. Gain hands-on expertise in coding, data analytics, digital marketing, and entrepreneurship.",
       action: "Join",
       link: "#",
     },
     {
       title: "Unlock Your Potential with One-on-One Mentorship Tailored to You",
-      description: "Receive guidance from experienced mentors dedicated to your success.",
+      description: "Receive personalized guidance from experienced mentors in tech, leadership, and business strategy to fast-track your career growth. ",
       action: "Learn",
       link: "#",
     },
     {
       title: "Engage in Real-World Projects to Solidify Your Learning Experience",
-      description: "Apply your knowledge through hands-on projects that mirror industry challenges.",
+      description: "Apply your knowledge through hands-on projects that mirror industry challenges—from building scalable apps to creating business growth strategies.",
       action: "Explore",
       link: "#",
     },
@@ -58,21 +58,26 @@ export default function Home() {
   const testimonials = [
     {
       quote: "The mentorship program was a game changer for me!",
-      author: "Alice Johnson",
-      role: "Software Engineer, TechCorp",
+      author: "Prangya",
+      role: "Data Analyst, Infosys",
+      image: "/testimonials/test-1.avif",
+      noOfStars: 5,
     },
     {
       quote: "Hands-on projects made complex concepts easy to grasp.",
-      author: "Mark Smith",
-      role: "Student, University",
+      author: "Tofan",
+      role: "Student, IIT Bombay",
+      image: "/testimonials/tofan.jpg",
+      noOfStars: 4,
     },
     {
       quote: "The one-on-one mentorship was invaluable to my growth.",
-      author: "Sarah Lee",
-      role: "Junior Developer, Startup",
+      author: "Arpita",
+      role: "Software Engineer, Google",
+      image: "/testimonials/arpita.jpg",
+      noOfStars: 5,
     },
-  ]
-
+  ];
   // useEffect(() => {
   //   const handleScroll = () => setScrollY(window.scrollY)
   //   window.addEventListener("scroll", handleScroll)
@@ -116,33 +121,29 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-bold leading-tight">
-              Learn, Build,
-              <span className="text-[#84BC54]"> Succeed</span>
+              Invest your weekends,
+              <span className="text-[#84BC54]"> accelerate your career!</span>
             </motion.h1>
 
             <motion.p variants={itemVariants} className="text-xl text-[#7C7D87]">
-              Master CS fundamentals, C programming, and DSA through hands-on learning with personalized mentorship.
+              Master industry-relevant  skills in a structured weekend program while balancing your work or studies.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex gap-4">
-              <Link href='/join'>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-[#84BC54] text-[#070823] px-8 py-3 rounded-full font-medium flex items-center gap-2"
               >
-                Start Learning <ChevronRight className="w-4 h-4" />
+                Join the Waitlist  <ChevronRight className="w-4 h-4" />
               </motion.button>
-              </Link>
-              <Link href="/about">
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="border border-[#7C7D87] px-8 py-3 rounded-full font-medium hover:bg-[#7C7D87]/10 transition-colors"
               >
                 Learn More
-              </motion.button>
-              </Link>
+              </motion.button> */}
             </motion.div>
           </div>
 
@@ -248,13 +249,7 @@ export default function Home() {
         <section className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-              <Image
-                src="https://images.unsplash.com/photo-1605711285791-0219e80e43a3?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Savings Growth"
-                width={500}
-                height={500}
-                className="rounded-2xl"
-              />
+              <Image src="/aveti-6.avif" alt="Learning Experience" width={500} height={500} className="rounded-2xl" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -262,22 +257,21 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-6"
             >
-              <h1 className="text-4xl font-bold text-[#070823]">Medium length section heading goes here</h1>
+              <h1 className="text-4xl font-bold text-[#070823]">Upskill, Network, and Succeed </h1>
               <p className="text-[#7C7D87]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum
-                tristique.
+                Join a community of tech and business enthusiasts, learn from expert mentors, and prepare for high-growth careers.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-4xl font-bold text-[#070823]">50%</h3>
-                  <p className="text-[#7C7D87]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <h3 className="text-4xl font-bold text-[#070823]">45%</h3>
+                  <p className="text-[#7C7D87]">of professionals who upskill see a salary increase within a year </p>
                 </div>
                 <div>
-                  <h3 className="text-4xl font-bold text-[#070823]">50%</h3>
-                  <p className="text-[#7C7D87]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <h3 className="text-4xl font-bold text-[#070823]">70%</h3>
+                  <p className="text-[#7C7D87]">of employees report higher job satisfaction after learning new tech skills.</p>
                 </div>
               </div>
-              <div className="flex gap-4">
+              {/* <div className="flex gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -292,7 +286,7 @@ export default function Home() {
                 >
                   Button
                 </motion.button>
-              </div>
+              </div> */}
             </motion.div>
           </div>
         </section>
@@ -306,7 +300,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="text-3xl md:text-4xl font-bold text-center text-[#070823] mb-12"
             >
-              Experience the Power of Hands-On Learning in Computer Science!
+              Experience the Power of Hands-On <br/> Learning in Tech & Business!
             </motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
@@ -317,7 +311,14 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="bg-[#D4EBC1] p-6 rounded-xl"
                 >
-                  <div className="aspect-video bg-[#84BC54]/20 rounded-lg mb-4" />
+                  <div className="relative aspect-video mb-4 rounded-lg overflow-hidden">
+                    <Image
+                      src={`/feature${index + 1}.jpg`}
+                      alt={feature.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <h3 className="text-xl font-semibold text-[#070823] mb-2">{feature.title}</h3>
                   <p className="text-[#7C7D87] mb-4">{feature.description}</p>
                   <Link href={feature.link} className="inline-flex items-center text-[#84BC54] hover:underline">
@@ -336,7 +337,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-12"
+              className="mb-12 text-center"
             >
               <h2 className="text-3xl font-bold text-[#070823]">Learner Feedback</h2>
               <p className="text-[#7C7D87]">Transformative experience that changed my career path.</p>
@@ -346,27 +347,34 @@ export default function Home() {
               <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex">
                   {testimonials.map((testimonial, index) => (
-                    <div key={index} className="flex-[0_0_100%] min-w-0 pl-4">
+                    <div key={index} className="flex-[0_0_100%] min-w-0 px-4">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="bg-[#84BC54] p-6 rounded-xl"
+                        className="bg-[#84BC54] p-6 rounded-xl flex flex-col items-center text-center max-w-2xl mx-auto"
                       >
+                        <img
+                          src={testimonial.image || "/placeholder.svg"}
+                          alt={testimonial.author}
+                          className="w-32 h-32 rounded-full object-cover mb-6"
+                        />
+
+                        {/* Star Rating */}
                         <div className="flex gap-1 mb-4">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className="text-yellow">
+                          {[...Array(testimonial.noOfStars)].map((_, i) => (
+                            <span key={i} className="text-yellow-400">
                               ★
                             </span>
                           ))}
                         </div>
-                        <p className="text-white mb-4">{testimonial.quote}</p>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-white rounded-full" />
-                          <div>
-                            <p className="font-semibold text-white">{testimonial.author}</p>
-                            <p className="text-sm text-white/80">{testimonial.role}</p>
-                          </div>
+
+                        <p className="text-white mb-6 text-lg">{testimonial.quote}</p>
+
+                        {/* Testimonial User Info */}
+                        <div>
+                          <p className="font-semibold text-white text-xl">{testimonial.author}</p>
+                          <p className="text-sm text-white/80">{testimonial.role}</p>
                         </div>
                       </motion.div>
                     </div>
@@ -374,24 +382,28 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Left Arrow Button */}
               <button
                 onClick={scrollPrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200"
               >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={scrollNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
-              >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6 text-gray-800" />
               </button>
 
-              <div className="flex justify-center gap-2 mt-4">
+              {/* Right Arrow Button */}
+              <button
+                onClick={scrollNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-800" />
+              </button>
+
+              {/* Pagination Dots */}
+              <div className="flex justify-center gap-2 mt-8">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
-                    className={`w-2 h-2 rounded-full ${index === selectedIndex ? "bg-[#84BC54]" : "bg-[#84BC54]/30"}`}
+                    className={`w-3 h-3 rounded-full ${index === selectedIndex ? "bg-[#84BC54]" : "bg-[#84BC54]/30"}`}
                     onClick={() => emblaApi?.scrollTo(index)}
                   />
                 ))}

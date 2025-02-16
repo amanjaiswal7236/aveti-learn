@@ -1,8 +1,9 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { BookOpen, Code2, Users, Trophy, Target, Rocket, Brain, Heart } from "lucide-react"
+import { BookOpen, Code2, Users, Trophy, Target, Rocket, Brain, Heart, Megaphone, Palette } from "lucide-react"
 import { useRef } from "react"
+import Image from "next/image"
 
 export default function About() {
   const containerRef = useRef(null)
@@ -20,26 +21,99 @@ export default function About() {
     { icon: BookOpen, label: "Course Hours", value: "1,000+" },
   ]
 
-  const team = [
-    {
-      name: "Dr. Sarah Chen",
-      role: "Lead Computer Science Mentor",
-      bio: "Ph.D. in Computer Science with 15+ years of industry experience at top tech companies.",
-      specialties: ["Algorithms", "System Design", "Machine Learning"],
-    },
-    {
-      name: "Mark Rodriguez",
-      role: "Senior Programming Instructor",
-      bio: "Former Google engineer specializing in algorithms and system design.",
-      specialties: ["Data Structures", "C++", "Python"],
-    },
-    {
-      name: "Emily Watson",
-      role: "Curriculum Director",
-      bio: "EdTech specialist with a focus on creating engaging learning experiences.",
-      specialties: ["Course Design", "Learning Science", "Assessment"],
-    },
-  ]
+  const team = {
+    tech: [
+      {
+        name: "Aman Jaiswal",
+        role: "Lead Computer Science Mentor",
+        bio: "Ph.D. in Computer Science with 15+ years of industry experience at top tech companies.",
+        specialties: ["Algorithms", "System Design", "Machine Learning"],
+        image: "/team/team-1.avif",
+      },
+      {
+        name: "Punit Kumar",
+        role: "Senior Programming Instructor",
+        bio: "Former Google engineer specializing in algorithms and system design.",
+        specialties: ["Data Structures", "C++", "Python"],
+        image: "/team/punit-kumar.jpg",
+      },
+      {
+        name: "Ankit Raj",
+        role: "Software Development Mentor",
+        bio: "Full-stack developer with experience in scalable web applications.",
+        specialties: ["JavaScript", "React", "Node.js"],
+        image: "/team/ankit-raj.jpg",
+      },
+      {
+        name: "Shubhendra Khuswah",
+        role: "AI & ML Instructor",
+        bio: "Machine learning engineer with expertise in deep learning models.",
+        specialties: ["Deep Learning", "NLP", "TensorFlow"],
+        image: "/team/shubhendra-khuswah.jpg",
+      },
+      {
+        name: "Ayush Sharma",
+        role: "Cloud Computing Expert",
+        bio: "Certified AWS and Azure architect with experience in DevOps and security.",
+        specialties: ["AWS", "Kubernetes", "DevOps"],
+        image: "/team/ayush-sharma.jpg",
+      },
+      {
+        name: "Biswajit Nayak",
+        role: "Cybersecurity Specialist",
+        bio: "Ethical hacker and security consultant with experience in penetration testing.",
+        specialties: ["Network Security", "Ethical Hacking", "Cyber Threat Analysis"],
+        image: "/team/biswajit-nayak.jpg",
+      },
+    ],
+    marketing: [
+      {
+        name: "Bana Bihari Kar",
+        role: "Digital Marketing Specialist",
+        bio: "Expert in SEO and content marketing with a focus on tech education.",
+        specialties: ["SEO", "Content Strategy", "Social Media"],
+        image: "/team/bana-bihari-kar.jpg",
+      },
+      {
+        name: "Sibabrata Choudhury",
+        role: "Brand Manager",
+        bio: "Creative professional with experience in tech startup branding.",
+        specialties: ["Brand Strategy", "Visual Design", "Market Research"],
+        image: "/team/sibabrata-choudhury.jpg",
+      },
+      {
+        name: "Bikas Kumar",
+        role: "Growth Marketing Lead",
+        bio: "Performance marketing specialist with expertise in user acquisition.",
+        specialties: ["Google Ads", "Social Media Advertising", "Data Analytics"],
+        image: "/team/bikas-kumar.jpg",
+      },
+    ],
+    softSkills: [
+      {
+        name: "Sushant Mahapatra",
+        role: "Curriculum Director",
+        bio: "EdTech specialist with a focus on creating engaging learning experiences.",
+        specialties: ["Course Design", "Learning Science", "Assessment"],
+        image: "/team/sushant-mahapatra.jpg",
+      },
+      {
+        name: "Sulgana Dash",
+        role: "Career Coach",
+        bio: "Experienced career counselor specializing in tech industry transitions.",
+        specialties: ["Interview Prep", "Resume Building", "Networking"],
+        image: "/team/sulgana-dash.jpg",
+      },
+      {
+        name: "Pragati Jaipuriar",
+        role: "Soft Skills Trainer",
+        bio: "Expert in communication skills, leadership training, and workplace etiquette.",
+        specialties: ["Public Speaking", "Leadership Training", "Emotional Intelligence"],
+        image: "/team/pragati-jaipuriar.jpg",
+      },
+    ],
+  };
+  
 
   const values = [
     {
@@ -69,7 +143,7 @@ export default function About() {
 
   return (
     <div className="bg-[#070823]" ref={containerRef}>
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Parallax - Dark */}
       <section className="min-h-screen relative flex items-center justify-center overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-[#84BC54]/20 to-transparent" />
@@ -111,8 +185,8 @@ export default function About() {
         </motion.div>
       </section>
 
-      {/* Stats Section with Counter Animation */}
-      <section className="py-20 bg-gradient-to-b from-[#070823] to-[#0f1235]">
+      {/* Stats Section with Counter Animation - Light */}
+      <section className="py-20 bg-[#D4EBC1]">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -122,14 +196,14 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-[#1a1f4d] p-6 rounded-xl text-center border border-[#84BC54]/20 backdrop-blur-sm"
+                className="bg-white p-6 rounded-xl text-center border border-[#84BC54]/20 shadow-lg"
               >
                 <stat.icon className="w-8 h-8 mx-auto mb-4 text-[#84BC54]" />
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 100, delay: index * 0.2 }}
-                  className="text-3xl font-bold text-white mb-2"
+                  className="text-3xl font-bold text-[#070823] mb-2"
                 >
                   {stat.value}
                 </motion.div>
@@ -140,8 +214,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* Values Section with Interactive Cards */}
-      <section className="py-20 bg-gradient-to-b from-[#0f1235] to-[#070823]">
+      {/* Values Section with Interactive Cards - Dark */}
+      <section className="py-20 bg-[#070823]">
         <div className="container mx-auto px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -178,47 +252,101 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section with Interactive Cards */}
-      <section className="py-20 bg-gradient-to-b from-[#070823] to-[#0f1235]">
+      {/* Team Section with Interactive Cards - Light */}
+      <section className="py-20 bg-[#D4EBC1]">
         <div className="container mx-auto px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-center text-white mb-12"
+            className="text-3xl font-bold text-center text-[#070823] mb-12"
           >
             Meet Our Expert Team
           </motion.h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#1a1f4d] p-6 rounded-xl border border-[#84BC54]/20"
-              >
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <div className="absolute inset-0 bg-[#84BC54]/20 rounded-full" />
-                  <div className="absolute inset-2 bg-[#84BC54]/30 rounded-full" />
-                  <div className="absolute inset-4 bg-[#84BC54]/40 rounded-full" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2 text-center">{member.name}</h3>
-                <p className="text-[#84BC54] mb-4 text-center">{member.role}</p>
-                <p className="text-[#7C7D87] text-center mb-4">{member.bio}</p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {member.specialties.map((specialty, i) => (
-                    <span key={i} className="px-3 py-1 bg-[#84BC54]/20 text-[#84BC54] text-sm rounded-full">
-                      {specialty}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+
+          {/* Tech Team */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-[#070823] mb-8 flex items-center">
+              <Code2 className="w-6 h-6 mr-2 text-[#84BC54]" />
+              Tech Experts
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {team.tech.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+            </div>
+          </div>
+
+          {/* Marketing Team */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-[#070823] mb-8 flex items-center">
+              <Megaphone className="w-6 h-6 mr-2 text-[#84BC54]" />
+              Marketing Specialists
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {team.marketing.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+            </div>
+          </div>
+
+          {/* Soft Skills Team */}
+          <div>
+            <h3 className="text-2xl font-bold text-[#070823] mb-8 flex items-center">
+              <Palette className="w-6 h-6 mr-2 text-[#84BC54]" />
+              Soft Skills Mentors
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {team.softSkills.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
     </div>
   )
 }
+
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  specialties: string[];
+  image: string;
+}
+
+function TeamMemberCard({ member }: { member: TeamMember }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white p-6 rounded-xl shadow-lg"
+    >
+      <div className="flex items-center mb-4">
+        <Image
+          src={member.image || "/placeholder.svg"}
+          alt={member.name}
+          width={64}
+          height={64}
+          className="rounded-full mr-4"
+        />
+        <div>
+          <h3 className="text-xl font-semibold text-[#070823]">{member.name}</h3>
+          <p className="text-[#84BC54]">{member.role}</p>
+        </div>
+      </div>
+      <p className="text-[#7C7D87] mb-4">{member.bio}</p>
+      <div className="flex flex-wrap gap-2">
+        {member.specialties.map((specialty, i) => (
+          <span key={i} className="px-3 py-1 bg-[#84BC54]/20 text-[#84BC54] text-sm rounded-full">
+            {specialty}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
