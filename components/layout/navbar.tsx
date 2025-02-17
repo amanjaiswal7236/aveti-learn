@@ -21,7 +21,7 @@ export default function Navbar() {
             height={40}
           />
         </Link>
-        <div className="flex items-center gap-8">
+        {/* <div className="flex items-center gap-8">
           <Link href="/about" className="text-white hover:text-[#84BC54] transition-colors">
             About
           </Link>
@@ -40,7 +40,7 @@ export default function Navbar() {
             Start Learning
           </motion.button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </motion.nav>
   )
