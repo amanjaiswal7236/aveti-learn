@@ -20,7 +20,7 @@ import {
   CheckCircle,
 } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
+//import Link from "next/link"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { zodResolver } from "@hookform/resolvers/zod"
