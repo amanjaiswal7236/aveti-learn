@@ -192,7 +192,7 @@ export default function Home() {
         role: "Lead Computer Science Mentor",
         bio: "Passionate educator with expertise in C programming, DSA, and CS fundamentals, dedicated to mentoring aspiring engineers.",
         specialties: ["Computer Science Fundamentals", "C Programming", "Data Structures & Algorithms"],
-        image: "/team/team-1.avif",
+        image: "/team/aman.jpg",
       },
       {
         name: "Punit Kumar",
@@ -610,7 +610,7 @@ export default function Home() {
                   {/* Progress Bar */}
                   <div className="mb-4">
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-[#070823]">Course Rating</span>
+                      <span className="text-[#070823]">Program Rating</span>
                       <span className="text-[#84BC54]">{course.progress}%</span>
                     </div>
                     <div className="h-2 bg-[#84BC54]/20 rounded-full overflow-hidden">
