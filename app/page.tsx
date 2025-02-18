@@ -598,9 +598,9 @@ export default function Home() {
                     </ul>
                   </div>
 
-                  <button className="w-full text-center bg-[#84BC54] text-white py-2 rounded-full hover:bg-[#84BC54]/90 transition-colors">
+                  {/* <button className="w-full text-center bg-[#84BC54] text-white py-2 rounded-full hover:bg-[#84BC54]/90 transition-colors">
                     Learn More
-                  </button>
+                  </button> */}
                 </div>
               </motion.div>
             ))}
