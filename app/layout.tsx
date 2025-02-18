@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Aveti Learning League",
-  description: "Master programming with personalized mentorship and hands-on projects",
+  description: "Invest your weekends, accelerate your career!",
   icons: {
     icon: "/window.svg",
   }

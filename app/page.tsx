@@ -23,28 +23,6 @@ import Image from "next/image"
 //import Link from "next/link"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-
-const formSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  role: z.string({
-    required_error: "Please select your role",
-  }),
-  experience: z.string({
-    required_error: "Please select your experience level",
-  }),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-})
 
 export default function Home() {
   const containerRef = useRef(null)
@@ -80,22 +58,6 @@ export default function Home() {
     }
   }, [emblaApi, onSelect])
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // Handle form submission
-  }
-
   const features = [
     {
       title: "Transform Your Skills with Personalized Mentorship and Real-World Projects ",
@@ -122,41 +84,44 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "This mentorship program transformed my career! The guidance and support I received were truly invaluable.",
+      quote:
+        "This mentorship program transformed my career! The guidance and support I received were truly invaluable.",
       author: "Prangya Priyadarsini",
       role: "Senior Motion Graphics Designer",
       image: "/testimonials/prangya.png",
       noOfStars: 5,
     },
     {
-      quote: "The hands-on projects made even the most complex concepts easy to understand and apply in real-world scenarios.",
+      quote:
+        "The hands-on projects made even the most complex concepts easy to understand and apply in real-world scenarios.",
       author: "Tofan Behera",
       role: "Principal Motion Graphics Designer",
       image: "/testimonials/tofan.png",
       noOfStars: 4,
     },
     {
-      quote: "Personalized mentorship gave me the clarity and confidence to excel. The experience was truly life-changing!",
+      quote:
+        "Personalized mentorship gave me the clarity and confidence to excel. The experience was truly life-changing!",
       author: "Arpita Nayak",
       role: "Software Intern",
       image: "/testimonials/arpita.png",
       noOfStars: 5,
     },
     {
-      quote: "The depth of knowledge and one-on-one guidance I received helped me sharpen my skills and grow professionally.",
+      quote:
+        "The depth of knowledge and one-on-one guidance I received helped me sharpen my skills and grow professionally.",
       author: "Prakash Ranjan Swain",
       role: "Content Developer",
       image: "/testimonials/prakash.png",
       noOfStars: 5,
     },
-  ];
-  
+  ]
 
   const stats = [
-    { icon: Users, label: "Students Enrolled", value: "10,000+" },
-    { icon: Code2, label: "Projects Completed", value: "25,000+" },
+    { icon: Users, label: "Students Enrolled", value: "100+" },
+    { icon: Code2, label: "Projects Completed", value: "3+" },
     { icon: Trophy, label: "Success Rate", value: "95%" },
-    { icon: BookOpen, label: "Course Hours", value: "1,000+" },
+    { icon: BookOpen, label: "Program Hours", value: "100+" },
   ]
 
   const values = [
@@ -233,7 +198,7 @@ export default function Home() {
     marketing: [
       {
         name: "Bana Bihari Kar",
-        role: "Sales Lead",
+        role: "Business Development Lead",
         bio: "Dynamic sales leader with a proven track record of driving revenue growth in the EdTech industry.",
         specialties: ["Sales Strategy", "Lead Generation", "Market Analysis"],
         image: "/team/bana.png",
@@ -276,8 +241,7 @@ export default function Home() {
         image: "/team/sulagna.png",
       },
     ],
-  };
-    
+  }
 
   const courses = [
     {
@@ -535,7 +499,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-center text-white mb-12"
+            className="text-4xl font-bold text-center text-white mb-12"
           >
             Our Core Values
           </motion.h2>
@@ -573,9 +537,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-center text-[#070823] mb-12"
+            className="text-4xl font-bold text-center text-[#070823] mb-12"
           >
-            Explore Our Course Catalog
+            Explore Our Program Catalog
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course, index) => (
@@ -651,7 +615,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-center text-[#070823] mb-12"
+            className="text-4xl font-bold text-center text-[#070823] mb-12"
           >
             Meet Our Expert Team
           </motion.h2>
@@ -798,154 +762,18 @@ export default function Home() {
           >
             Join Our Learning Community
           </motion.h2>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="bg-[#1a1f4d] p-8 rounded-xl shadow-lg border border-[#84BC54]/20"
             >
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">First Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="John" {...field} className="bg-[#D4EBC1] border-[#84BC54]/20" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Last Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Doe" {...field} className="bg-[#D4EBC1] border-[#84BC54]/20" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="john.doe@example.com"
-                              {...field}
-                              className="bg-[#D4EBC1] border-[#84BC54]/20"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Phone Number</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="+1 (555) 000-0000"
-                              {...field}
-                              className="bg-[#D4EBC1] border-[#84BC54]/20"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="role"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">I want to join as</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="bg-[#D4EBC1] border-[#84BC54]/20">
-                                <SelectValue placeholder="Select your role" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="student">Student</SelectItem>
-                              <SelectItem value="mentor">Mentor</SelectItem>
-                              <SelectItem value="partner">Partner</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="experience"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Experience Level</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="bg-[#D4EBC1] border-[#84BC54]/20">
-                                <SelectValue placeholder="Select your experience" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="beginner">Beginner</SelectItem>
-                              <SelectItem value="intermediate">Intermediate</SelectItem>
-                              <SelectItem value="advanced">Advanced</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">Tell us about yourself</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Share your goals and what you hope to achieve..."
-                            className="min-h-[120px] bg-[#D4EBC1] border-[#84BC54]/20"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription className="text-[#7C7D87]">
-                          Tell us about your background, interests, and what motivates you to join our community.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button type="submit" className="w-full bg-[#84BC54] hover:bg-[#84BC54]/90">
-                    Submit Application
-                  </Button>
-                </form>
-              </Form>
+              <iframe
+                src="https://app.nocodb.com/#/nc/form/d5089d09-f289-400a-bb3e-b52f26791769"
+                className="w-full min-h-[800px] border-none"
+                title="Aveti Learning Internship Programs Application Form"
+              />
             </motion.div>
           </div>
         </div>
