@@ -18,11 +18,21 @@ import {
   Megaphone,
   Palette,
   CheckCircle,
+  Star,
 } from "lucide-react"
 import Image from "next/image"
 //import Link from "next/link"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   const containerRef = useRef(null)
@@ -249,7 +259,7 @@ export default function Home() {
       title: "Tech Skills Bootcamp",
       description: "Master the latest tech skills with hands-on projects and real-world applications.",
       duration: "12 weeks",
-      level: "Advanced",
+      level: "Tech" as "Tech" | "Marketing" | "Trainer",
       topics: ["Full-Stack Development", "Data Science & AI", "Cloud Computing", "Cybersecurity"],
       progress: 88,
       students: 2500,
@@ -260,7 +270,7 @@ export default function Home() {
       title: "Business Development Program",
       description: "Learn essential business strategies and sales techniques to drive growth.",
       duration: "10 weeks",
-      level: "Intermediate",
+      level: "Marketing" as "Tech" | "Marketing" | "Trainer",
       topics: ["Sales & Negotiation", "Digital Marketing & Branding", "Financial Literacy", "Growth Hacking"],
       progress: 90,
       students: 1800,
@@ -271,7 +281,7 @@ export default function Home() {
       title: "Teacher Grooming & Leadership",
       description: "Develop essential teaching methodologies and leadership skills for effective education.",
       duration: "8 weeks",
-      level: "Beginner",
+      level: "Trainer" as "Tech" | "Marketing" | "Trainer",
       topics: [
         "Classroom Management",
         "Student Engagement Techniques",
@@ -283,6 +293,135 @@ export default function Home() {
       image: "/advance.jpg",
     },
   ]
+
+  type CourseLevel = "Tech" | "Marketing" | "Trainer";
+  
+  const recommendedCourses: Record<CourseLevel, Array<{
+    title: string;
+    duration: string;
+    description: string;
+    image: string;
+    instructor: string;
+    rating: number;
+    students: number;
+    details: string;
+    link: string;
+  }>> = {
+    Trainer: [
+      {
+        title: "Introduction to Programming",
+        duration: "6 weeks",
+        description: "Perfect starting point for those new to coding",
+        image: "/placeholder.svg",
+        instructor: "Aman Jaiswal",
+        rating: 4.8,
+        students: 850,
+        details:
+          "Learn the fundamentals of programming logic, basic syntax, and problem-solving approaches that form the foundation of all coding languages.",
+        link: "/courses/introduction-to-programming",
+      },
+      {
+        title: "Fundamentals of Business",
+        duration: "4 weeks",
+        description: "Learn the basics of business operations and strategy",
+        image: "/placeholder.svg",
+        instructor: "Bana Bihari Kar",
+        rating: 4.7,
+        students: 720,
+        details:
+          "Understand core business concepts including market analysis, basic accounting principles, and organizational structures for entrepreneurial success.",
+        link: "/courses/fundamentals-of-business",
+      },
+      {
+        title: "Teaching Essentials",
+        duration: "5 weeks",
+        description: "Core teaching methodologies for new educators",
+        image: "/placeholder.svg",
+        instructor: "Sushant Mahapatra",
+        rating: 4.9,
+        students: 630,
+        details:
+          "Master fundamental teaching techniques, classroom management strategies, and student engagement methods for effective educational delivery.",
+        link: "/courses/teaching-essentials",
+      },
+    ],
+    Marketing: [
+      {
+        title: "Web Development Bootcamp",
+        duration: "8 weeks",
+        description: "Build responsive websites with modern frameworks",
+        image: "/placeholder.svg",
+        instructor: "Ayush Sharma",
+        rating: 4.8,
+        students: 1250,
+        details:
+          "Create dynamic, responsive websites using HTML5, CSS3, JavaScript, and popular frameworks like React while implementing industry best practices.",
+        link: "/courses/web-development-bootcamp",
+      },
+      {
+        title: "Digital Marketing Mastery",
+        duration: "6 weeks",
+        description: "Advanced strategies for online brand growth",
+        image: "/placeholder.svg",
+        instructor: "Sibabrata Choudhury",
+        rating: 4.7,
+        students: 980,
+        details:
+          "Develop comprehensive digital marketing campaigns across multiple platforms, utilizing data analytics to optimize performance and drive conversions.",
+        link: "/courses/digital-marketing-mastery",
+      },
+      {
+        title: "Classroom Technology Integration",
+        duration: "7 weeks",
+        description: "Enhance learning with educational technology",
+        image: "/placeholder.svg",
+        instructor: "Pragati Jaipuriar",
+        rating: 4.6,
+        students: 870,
+        details:
+          "Implement cutting-edge educational technologies to create engaging, interactive learning experiences that improve student outcomes and participation.",
+        link: "/courses/classroom-technology-integration",
+      },
+    ],
+    Tech: [
+      {
+        title: "Mastering Data Structures & Algorithms using C and C++",
+        duration: "12 weeks",
+        description: "Learn, Analyse and Implement Data Structure using C and C++. Learn Recursion and Sorting.",
+        image: "/courses/dsa.jpg",
+        instructor: "Abdul Bari",
+        rating: 4.9,
+        students: 1450,
+        details:
+          "Build complete web applications from database design to user interface, including authentication, API development, and deployment strategies.",
+        link: "/courses/mastering-data-structures-and-algorithms",
+      },
+      {
+        title: "100 Days of Code: The Complete Python Pro Bootcamp",
+        duration: "15 weeks",
+        description: "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!",
+        image: "/courses/python.webp",
+        instructor: "Angila Yu",
+        rating: 4.8,
+        students: 1120,
+        details:
+          "Apply advanced analytics and innovative growth strategies to rapidly scale businesses, optimize conversion funnels, and maximize customer acquisition.",
+        link: "/courses/100-days-of-code",
+      },
+      {
+        title: "SQL for Beginners: Learn SQL using MySQL and Database Design",
+        duration: "9 weeks",
+        description: "Understand SQL using the MySQL database. Learn Database Design and Data Analysis with Normalization and Relationships",
+        image: "/courses/sql.jpg",
+        instructor: "Tim Buchalka",
+        rating: 4.7,
+        students: 890,
+        details:
+          "Develop the leadership skills needed to guide educational institutions, including curriculum development, staff management, and institutional vision setting.",
+        link: "",
+      },
+    ],
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -562,8 +701,78 @@ export default function Home() {
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-semibold text-white mb-2">{course.title}</h3>
                     <div className="flex justify-between items-center">
-                      <span className="text-white/80 text-sm">{course.duration}</span>
-                      <span className="px-2 py-1 bg-[#84BC54] text-white text-sm rounded-full">{course.level}</span>
+                      {/* <span className="text-white/80 text-sm">{course.duration}</span> */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="bg-[#84BC54] text-white hover:bg-[#84BC54]/90 border-none text-sm px-3 py-1 h-auto rounded-full"
+                          >
+                            Recommended Courses
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[600px]">
+                          <DialogHeader>
+                            <DialogTitle className="text-lg font-bold">
+                              Recommended for {course.level}
+                            </DialogTitle>
+                            <DialogDescription>Courses that complement {course.title}</DialogDescription>
+                          </DialogHeader>
+                          <div className="grid gap-4 mt-4">
+                            {recommendedCourses[course.level]?.map((rec, idx) => (
+                              <div
+                                key={idx}
+                                className="border border-[#84BC54]/20 p-4 rounded-lg hover:bg-[#D4EBC1]/20 transition-all duration-300 cursor-pointer group relative overflow-hidden"
+                                onClick={() =>
+                                  (window.location.href = `/courses/${rec.title.toLowerCase().replace(/\s+/g, "-")}`)
+                                }
+                              >
+                                <div className="flex gap-4">
+                                  <div className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0">
+                                    <Image
+                                      src={rec.image || "/placeholder.svg"}
+                                      alt={rec.title}
+                                      width={80}
+                                      height={80}
+                                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="flex justify-between items-start">
+                                      <h4 className="font-medium text-[#070823] group-hover:text-[#84BC54] transition-colors">
+                                        {rec.title}
+                                      </h4>
+                                      <span className="text-sm text-[#7C7D87]">{rec.duration}</span>
+                                    </div>
+                                    <p className="text-sm text-[#7C7D87] mt-1">{rec.description}</p>
+
+                                    <div className="flex items-center mt-2 text-sm text-[#7C7D87]">
+                                      <span className="flex items-center">
+                                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
+                                        {rec.rating}
+                                      </span>
+                                      <span className="mx-2">•</span>
+                                      <span>{rec.students} students</span>
+                                      <span className="mx-2">•</span>
+                                      <span>Instructor: {rec.instructor}</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Expanded details on hover */}
+                                <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-24 mt-0 group-hover:mt-3 opacity-0 group-hover:opacity-100">
+                                  <p className="text-sm text-[#070823]">{rec.details}</p>
+                                  <div className="flex justify-end mt-2">
+                                    <span className="text-[#84BC54] text-sm font-medium flex items-center">
+                                      View Course <ChevronRight className="w-4 h-4 ml-1" />
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </div>
                 </div>
@@ -628,7 +837,7 @@ export default function Home() {
                 {category === "softSkills" && <Palette className="w-6 h-6 mr-2 text-[#84BC54]" />}
                 {category === "tech" && "Tech Experts"}
                 {category === "marketing" && "Marketing Specialists"}
-                {category === "softSkills" && "Soft Skills Mentors"}
+                {category === "softSkills" && "Teachers Trainer"}
               </h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {members.map((member, index) => (
@@ -810,4 +1019,3 @@ export default function Home() {
     </div>
   )
 }
-
