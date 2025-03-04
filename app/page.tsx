@@ -19,20 +19,22 @@ import {
   Palette,
   CheckCircle,
   Star,
+  Clock,
+  Users2,
+  ArrowRight,
+  Layers,
+  User,
+  Calendar,
+  GraduationCap,
+  FileText,
 } from "lucide-react"
 import Image from "next/image"
-//import Link from "next/link"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Home() {
   const containerRef = useRef(null)
@@ -45,6 +47,7 @@ export default function Home() {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedCourse, setSelectedCourse] = useState<(typeof courses)[0] | null>(null)
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev()
@@ -67,6 +70,59 @@ export default function Home() {
       emblaApi.off("select", onSelect)
     }
   }, [emblaApi, onSelect])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = document.getElementById("course-scroll-container")
+      if (!container) return
+
+      const courseElements = container.querySelectorAll('[id^="course-"]')
+      if (courseElements.length === 0) return
+
+      // Find the course element that's most visible in the viewport
+      let mostVisibleCourse = null
+      let maxVisibleHeight = 0
+
+      courseElements.forEach((element) => {
+        const rect = element.getBoundingClientRect()
+        const containerRect = container.getBoundingClientRect()
+
+        // Calculate how much of the element is visible in the container
+        const visibleTop = Math.max(rect.top, containerRect.top)
+        const visibleBottom = Math.min(rect.bottom, containerRect.bottom)
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+
+        if (visibleHeight > maxVisibleHeight) {
+          maxVisibleHeight = visibleHeight
+          mostVisibleCourse = element
+        }
+      })
+
+      if (mostVisibleCourse) {
+        const courseId = (mostVisibleCourse as HTMLElement).id.replace("course-", "")
+
+        // Update active state for all buttons
+        const buttons = document.querySelectorAll("[data-course-button]")
+        buttons.forEach((btn) => {
+          btn.classList.remove("bg-[#84BC54]/20", "text-[#84BC54]")
+          btn.classList.add("hover:bg-white/10", "text-white/80")
+        })
+
+        // Set active state for the button corresponding to the visible course
+        const activeButton = document.querySelector(`[data-course-id="${courseId}"]`)
+        if (activeButton) {
+          activeButton.classList.remove("hover:bg-white/10", "text-white/80")
+          activeButton.classList.add("bg-[#84BC54]/20", "text-[#84BC54]")
+        }
+      }
+    }
+
+    const container = document.getElementById("course-scroll-container")
+    if (container) {
+      container.addEventListener("scroll", handleScroll)
+      return () => container.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   const features = [
     {
@@ -255,6 +311,7 @@ export default function Home() {
 
   const courses = [
     {
+      id: "tech-bootcamp",
       icon: Code2,
       title: "Tech Skills Bootcamp",
       description: "Master the latest tech skills with hands-on projects and real-world applications.",
@@ -264,8 +321,46 @@ export default function Home() {
       progress: 88,
       students: 2500,
       image: "/tech.jpg",
+      instructors: ["Aman Jaiswal", "Ayush Sharma", "Ankit Raj"],
+      schedule: "Weekends (Sat-Sun, 10 AM - 1 PM)",
+      prerequisites: ["Basic programming knowledge", "Familiarity with web technologies", "Problem-solving aptitude"],
+      projects: [
+        "Build a full-stack web application",
+        "Develop a machine learning model",
+        "Create a cloud-based microservice architecture",
+      ],
+      outcomes: [
+        "Proficiency in modern programming languages",
+        "Portfolio of real-world projects",
+        "Industry-ready technical skills",
+        "Ability to architect scalable solutions",
+      ],
+      testimonial: {
+        quote:
+          "The Tech Skills Bootcamp transformed my career trajectory completely. The hands-on approach and expert mentorship helped me land my dream job!",
+        author: "Rahul Sharma",
+        role: "Software Engineer at Amazon",
+      },
+      faqs: [
+        {
+          question: "Is this program suitable for beginners?",
+          answer:
+            "While some basic programming knowledge is helpful, we have designed the curriculum to accommodate learners with varying levels of experience. We provide additional resources for beginners to catch up.",
+        },
+        {
+          question: "Will I receive a certificate upon completion?",
+          answer:
+            "Yes, all participants who successfully complete the program will receive a certificate of completion that can be shared with potential employers.",
+        },
+        {
+          question: "How much time should I dedicate outside of class hours?",
+          answer:
+            "We recommend allocating 10-15 hours per week for assignments, projects, and self-study to get the most out of the program.",
+        },
+      ],
     },
     {
+      id: "business-development",
       icon: Briefcase,
       title: "Business Development Program",
       description: "Learn essential business strategies and sales techniques to drive growth.",
@@ -275,8 +370,50 @@ export default function Home() {
       progress: 90,
       students: 1800,
       image: "/marketing.jpg",
+      instructors: ["Bana Bihari Kar", "Sibabrata Choudhury"],
+      schedule: "Weekends (Sat-Sun, 2 PM - 5 PM)",
+      prerequisites: [
+        "Basic understanding of business concepts",
+        "Interest in marketing and sales",
+        "Communication skills",
+      ],
+      projects: [
+        "Develop a comprehensive marketing strategy",
+        "Create and execute a sales campaign",
+        "Build a business growth plan",
+      ],
+      outcomes: [
+        "Strategic business development skills",
+        "Proficiency in digital marketing tools",
+        "Sales negotiation expertise",
+        "Financial planning abilities",
+      ],
+      testimonial: {
+        quote:
+          "The Business Development Program gave me practical skills I could immediately apply to grow my startup. The mentorship was invaluable!",
+        author: "Priya Malhotra",
+        role: "Founder & CEO, GrowthTech",
+      },
+      faqs: [
+        {
+          question: "Do I need prior business experience?",
+          answer:
+            "No prior business experience is required. The program is designed to build your skills from the ground up while also providing value to those with some experience.",
+        },
+        {
+          question: "Will this program help me start my own business?",
+          answer:
+            "The program covers essential aspects of business development, marketing, and financial planning that are crucial for entrepreneurs.",
+        },
+        {
+          question: "Is there networking opportunity with industry professionals?",
+          answer:
+            "Yes, we regularly invite guest speakers from the industry and organize networking events to help you build valuable connections.",
+        },
+      ],
     },
     {
+      id: "teacher-grooming",
       icon: Users,
       title: "Teacher Grooming & Leadership",
       description: "Develop essential teaching methodologies and leadership skills for effective education.",
@@ -291,24 +428,67 @@ export default function Home() {
       progress: 85,
       students: 1200,
       image: "/advance.jpg",
+      instructors: ["Sushant Mahapatra", "Pragati Jaipuriar", "Sulgna Dash"],
+      schedule: "Weekends (Sat-Sun, 9 AM - 12 PM)",
+      prerequisites: ["Passion for education", "Basic teaching experience or interest", "Willingness to innovate"],
+      projects: [
+        "Design an innovative lesson plan",
+        "Develop a student engagement strategy",
+        "Create a technology integration plan for classrooms",
+      ],
+      outcomes: [
+        "Advanced teaching methodologies",
+        "Classroom management expertise",
+        "Educational leadership skills",
+        "EdTech integration capabilities",
+      ],
+      testimonial: {
+        quote:
+          "This program revolutionized my teaching approach. I've seen remarkable improvement in student engagement and learning outcomes in my classroom.",
+        author: "Anjali Desai",
+        role: "Senior Teacher, Delhi Public School",
+      },
+      faqs: [
+        {
+          question: "Is this program only for current teachers?",
+          answer:
+            "No, the program is designed for both current educators and those aspiring to enter the teaching profession. We welcome anyone passionate about education.",
+        },
+        {
+          question: "Will I learn about the latest educational technologies?",
+          answer:
+            "Yes, a significant portion of the curriculum focuses on integrating modern educational technologies into traditional teaching methods.",
+        },
+        {
+          question: "How will this program help advance my career in education?",
+          answer:
+            "The program equips you with advanced teaching methodologies, leadership skills, and technology integration capabilities that are highly valued in educational institutions.",
+        },
+      ],
     },
   ]
 
-  type CourseLevel = "Tech" | "Marketing" | "Trainer";
-  
-  const recommendedCourses: Record<CourseLevel, Array<{
-    title: string;
-    duration: string;
-    description: string;
-    image: string;
-    instructor: string;
-    rating: number;
-    students: number;
-    details: string;
-    link: string;
-  }>> = {
+  type CourseLevel = "Tech" | "Marketing" | "Trainer"
+
+  const recommendedCourses: Record<
+    CourseLevel,
+    Array<{
+      id: string
+      title: string
+      duration: string
+      description: string
+      image: string
+      instructor: string
+      rating: number
+      students: number
+      details: string
+      link: string
+      externalUrl?: string
+    }>
+  > = {
     Trainer: [
       {
+        id: "intro-programming",
         title: "Introduction to Programming",
         duration: "6 weeks",
         description: "Perfect starting point for those new to coding",
@@ -319,8 +499,10 @@ export default function Home() {
         details:
           "Learn the fundamentals of programming logic, basic syntax, and problem-solving approaches that form the foundation of all coding languages.",
         link: "/courses/introduction-to-programming",
+        externalUrl: "https://www.udemy.com/course/complete-python-bootcamp/",
       },
       {
+        id: "fundamentals-business",
         title: "Fundamentals of Business",
         duration: "4 weeks",
         description: "Learn the basics of business operations and strategy",
@@ -331,8 +513,10 @@ export default function Home() {
         details:
           "Understand core business concepts including market analysis, basic accounting principles, and organizational structures for entrepreneurial success.",
         link: "/courses/fundamentals-of-business",
+        externalUrl: "https://www.udemy.com/course/the-business-intelligence-analyst-course-2018/",
       },
       {
+        id: "teaching-essentials",
         title: "Teaching Essentials",
         duration: "5 weeks",
         description: "Core teaching methodologies for new educators",
@@ -343,10 +527,40 @@ export default function Home() {
         details:
           "Master fundamental teaching techniques, classroom management strategies, and student engagement methods for effective educational delivery.",
         link: "/courses/teaching-essentials",
+        externalUrl: "https://www.udemy.com/course/teaching-online/",
+      },
+      {
+        id: "educational-psychology",
+        title: "Educational Psychology",
+        duration: "7 weeks",
+        description: "Understanding how students learn and develop",
+        image: "/placeholder.svg",
+        instructor: "Dr. Meena Sharma",
+        rating: 4.6,
+        students: 520,
+        details:
+          "Explore cognitive development, learning theories, and motivation strategies to create more effective and engaging learning environments.",
+        link: "/courses/educational-psychology",
+        externalUrl: "https://www.coursera.org/learn/educational-psychology",
+      },
+      {
+        id: "classroom-management",
+        title: "Classroom Management Mastery",
+        duration: "4 weeks",
+        description: "Strategies for effective classroom control",
+        image: "/placeholder.svg",
+        instructor: "Rajiv Mehta",
+        rating: 4.7,
+        students: 780,
+        details:
+          "Learn proven techniques for maintaining discipline, creating positive learning environments, and handling challenging student behaviors.",
+        link: "/courses/classroom-management",
+        externalUrl: "https://www.edx.org/learn/education/classroom-management",
       },
     ],
     Marketing: [
       {
+        id: "web-development",
         title: "Web Development Bootcamp",
         duration: "8 weeks",
         description: "Build responsive websites with modern frameworks",
@@ -357,8 +571,10 @@ export default function Home() {
         details:
           "Create dynamic, responsive websites using HTML5, CSS3, JavaScript, and popular frameworks like React while implementing industry best practices.",
         link: "/courses/web-development-bootcamp",
+        externalUrl: "https://www.udemy.com/course/the-complete-web-development-bootcamp/",
       },
       {
+        id: "digital-marketing",
         title: "Digital Marketing Mastery",
         duration: "6 weeks",
         description: "Advanced strategies for online brand growth",
@@ -369,8 +585,10 @@ export default function Home() {
         details:
           "Develop comprehensive digital marketing campaigns across multiple platforms, utilizing data analytics to optimize performance and drive conversions.",
         link: "/courses/digital-marketing-mastery",
+        externalUrl: "https://www.udemy.com/course/complete-digital-marketing-course/",
       },
       {
+        id: "classroom-tech",
         title: "Classroom Technology Integration",
         duration: "7 weeks",
         description: "Enhance learning with educational technology",
@@ -381,10 +599,40 @@ export default function Home() {
         details:
           "Implement cutting-edge educational technologies to create engaging, interactive learning experiences that improve student outcomes and participation.",
         link: "/courses/classroom-technology-integration",
+        externalUrl: "https://www.coursera.org/learn/teaching-with-technology",
+      },
+      {
+        id: "social-media-marketing",
+        title: "Social Media Marketing Strategy",
+        duration: "5 weeks",
+        description: "Master social platforms for business growth",
+        image: "/placeholder.svg",
+        instructor: "Priya Malhotra",
+        rating: 4.8,
+        students: 1450,
+        details:
+          "Learn to create engaging content, build communities, and drive conversions through strategic social media campaigns across all major platforms.",
+        link: "/courses/social-media-marketing",
+        externalUrl: "https://www.udemy.com/course/complete-social-media-marketing-course/",
+      },
+      {
+        id: "seo-fundamentals",
+        title: "SEO Fundamentals & Strategy",
+        duration: "6 weeks",
+        description: "Drive organic traffic through search optimization",
+        image: "/placeholder.svg",
+        instructor: "Vikram Singh",
+        rating: 4.7,
+        students: 920,
+        details:
+          "Master the technical and content aspects of search engine optimization to improve rankings, increase visibility, and drive qualified traffic to your website.",
+        link: "/courses/seo-fundamentals",
+        externalUrl: "https://www.udemy.com/course/seo-training/",
       },
     ],
     Tech: [
       {
+        id: "data-structures",
         title: "Mastering Data Structures & Algorithms using C and C++",
         duration: "12 weeks",
         description: "Learn, Analyse and Implement Data Structure using C and C++. Learn Recursion and Sorting.",
@@ -395,30 +643,65 @@ export default function Home() {
         details:
           "Build complete web applications from database design to user interface, including authentication, API development, and deployment strategies.",
         link: "/courses/mastering-data-structures-and-algorithms",
+        externalUrl: "https://www.udemy.com/course/datastructurescncpp/",
       },
       {
+        id: "python-bootcamp",
         title: "100 Days of Code: The Complete Python Pro Bootcamp",
         duration: "15 weeks",
-        description: "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!",
+        description:
+          "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!",
         image: "/courses/python.webp",
-        instructor: "Angila Yu",
+        instructor: "Angela Yu",
         rating: 4.8,
         students: 1120,
         details:
           "Apply advanced analytics and innovative growth strategies to rapidly scale businesses, optimize conversion funnels, and maximize customer acquisition.",
         link: "/courses/100-days-of-code",
+        externalUrl: "https://www.udemy.com/course/100-days-of-code/",
       },
       {
+        id: "sql-beginners",
         title: "SQL for Beginners: Learn SQL using MySQL and Database Design",
         duration: "9 weeks",
-        description: "Understand SQL using the MySQL database. Learn Database Design and Data Analysis with Normalization and Relationships",
+        description:
+          "Understand SQL using the MySQL database. Learn Database Design and Data Analysis with Normalization and Relationships",
         image: "/courses/sql.jpg",
         instructor: "Tim Buchalka",
         rating: 4.7,
         students: 890,
         details:
           "Develop the leadership skills needed to guide educational institutions, including curriculum development, staff management, and institutional vision setting.",
-        link: "",
+        link: "/courses/sql-beginners",
+        externalUrl: "https://www.udemy.com/course/sql-for-beginners-course/",
+      },
+      {
+        id: "javascript-complete",
+        title: "The Complete JavaScript Course 2024",
+        duration: "10 weeks",
+        description: "Master JavaScript with the most comprehensive course on the market",
+        image: "/placeholder.svg",
+        instructor: "Jonas Schmedtmann",
+        rating: 4.8,
+        students: 1680,
+        details:
+          "From fundamentals to advanced topics like OOP, asynchronous JavaScript, and modern tooling. Build real-world projects including games and applications.",
+        link: "/courses/javascript-complete",
+        externalUrl: "https://www.udemy.com/course/the-complete-javascript-course/",
+      },
+      {
+        id: "react-complete",
+        title: "React - The Complete Guide 2024",
+        duration: "11 weeks",
+        description: "Master React.js from beginner to advanced",
+        image: "/placeholder.svg",
+        instructor: "Maximilian Schwarzmüller",
+        rating: 4.7,
+        students: 1520,
+        details:
+          "Learn React.js from scratch! Hooks, Redux, React Router, Next.js and way more! Build powerful, fast, user-friendly and reactive web apps.",
+        link: "/courses/react-complete",
+        externalUrl: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/",
       },
     ],
   }
@@ -622,9 +905,6 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-[#070823] mb-2">{feature.title}</h3>
                 <p className="text-[#7C7D87] mb-4">{feature.description}</p>
-                {/* <Link href={feature.link} className="inline-flex items-center text-[#84BC54] hover:underline">
-                  {feature.action} <ChevronRight className="w-4 h-4 ml-1" />
-                </Link> */}
               </motion.div>
             ))}
           </div>
@@ -669,147 +949,453 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Courses Section */}
-      <section id="courses" className="py-20 bg-[#D4EBC1]">
+      {/* Courses Section - REDESIGNED */}
+      <section id="courses" className="py-20 bg-gradient-to-b from-[#D4EBC1] to-white">
         <div className="container mx-auto px-4">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-bold text-center text-[#070823] mb-12"
+            className="text-center mb-16"
           >
-            Explore Our Program Catalog
-          </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h2 className="text-4xl font-bold text-[#070823] mb-4">Explore Our Program Catalog</h2>
+            <p className="text-[#7C7D87] max-w-2xl mx-auto">
+              Accelerate your career with our specialized weekend programs designed to fit your busy schedule
+            </p>
+          </motion.div>
+
+          <div className="space-y-16">
             {courses.map((course, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden group"
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="relative"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={course.image || "/placeholder.svg"}
-                    alt={course.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-xl font-semibold text-white mb-2">{course.title}</h3>
-                    <div className="flex justify-between items-center">
-                      {/* <span className="text-white/80 text-sm">{course.duration}</span> */}
+                <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#84BC54] to-transparent rounded-full hidden md:block" />
+
+                <div className="grid md:grid-cols-12 gap-8 items-center">
+                  {/* Left side - Course image and basic info */}
+                  <div className="md:col-span-5 lg:col-span-4">
+                    <div className="relative overflow-hidden rounded-2xl group">
+                      <div className="aspect-[4/3] relative">
+                        <Image
+                          src={course.image || "/placeholder.svg"}
+                          alt={course.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                      </div>
+
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <Badge className="bg-[#84BC54] hover:bg-[#84BC54]/90 mb-3">{course.level}</Badge>
+                        <div className="flex items-center gap-2 text-white/80 text-sm">
+                          <Clock className="w-4 h-4" />
+                          <span>{course.duration}</span>
+                          <span className="mx-1">•</span>
+                          <Users2 className="w-4 h-4" />
+                          <span>{course.students.toLocaleString()} students</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Course details */}
+                  <div className="md:col-span-7 lg:col-span-8">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="bg-[#84BC54]/20 p-2 rounded-lg">
+                        <course.icon className="w-5 h-5 text-[#84BC54]" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-[#070823]">{course.title}</h3>
+                    </div>
+
+                    <p className="text-[#7C7D87] mb-6 text-lg">{course.description}</p>
+
+                    {/* Progress Bar */}
+                    <div className="mb-6">
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-[#070823] font-medium">Program Rating</span>
+                        <span className="text-[#84BC54] font-medium">{course.progress}%</span>
+                      </div>
+                      <div className="h-2 bg-[#84BC54]/20 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${course.progress}%` }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          className="h-full bg-[#84BC54]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Topics */}
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-[#070823] mb-3 flex items-center gap-2">
+                        <Layers className="w-4 h-4 text-[#84BC54]" />
+                        Key Topics
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {course.topics.map((topic, i) => (
+                          <Badge
+                            key={i}
+                            variant="outline"
+                            className="bg-white border-[#84BC54]/30 text-[#070823] hover:bg-[#84BC54]/10"
+                          >
+                            {topic}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap gap-3">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button className="bg-[#84BC54] hover:bg-[#84BC54]/90 text-white rounded-full px-6">
+                            Recommended Courses
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
+                          <div className="flex flex-col md:flex-row h-[600px] max-h-[80vh]">
+                            {/* Left sidebar with course categories */}
+                            <div className="bg-[#070823] text-white p-6 w-full md:w-64 flex-shrink-0">
+                              <DialogTitle className="text-xl font-bold mb-6 text-white">
+                                Recommended for {course.level}
+                              </DialogTitle>
+                              <DialogDescription className="text-white/70 mb-6">
+                                Courses that complement {course.title}
+                              </DialogDescription>
+
+                              <div className="space-y-1 mt-8">
+                                {recommendedCourses[course.level]?.map((rec, idx) => (
+                                  <button
+                                    key={idx}
+                                    onClick={() => {
+                                      const element = document.getElementById(`course-${rec.id}`)
+                                      if (element) {
+                                        element.scrollIntoView({ behavior: "smooth" })
+                                        // Update active state for all buttons
+                                        const buttons = document.querySelectorAll("[data-course-button]")
+                                        buttons.forEach((btn) =>
+                                          btn.classList.remove("bg-[#84BC54]/20", "text-[#84BC54]"),
+                                        )
+                                        buttons.forEach((btn) =>
+                                          btn.classList.add("hover:bg-white/10", "text-white/80"),
+                                        )
+                                        // Set active state for clicked button
+                                        const clickedButton = document.querySelector(`[data-course-id="${rec.id}"]`)
+                                        if (clickedButton) {
+                                          clickedButton.classList.remove("hover:bg-white/10", "text-white/80")
+                                          clickedButton.classList.add("bg-[#84BC54]/20", "text-[#84BC54]")
+                                        }
+                                      }
+                                    }}
+                                    data-course-button
+                                    data-course-id={rec.id}
+                                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                                      idx === 0 ? "bg-[#84BC54]/20 text-[#84BC54]" : "hover:bg-white/10 text-white/80"
+                                    }`}
+                                  >
+                                    {rec.title.length > 20 ? `${rec.title.substring(0, 20)}...` : rec.title}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Right content area with course details */}
+                            <div className="flex-1 overflow-y-auto" id="course-scroll-container">
+                              <div className="p-6">
+                                {recommendedCourses[course.level]?.map((rec, idx) => (
+                                  <div key={idx} id={`course-${rec.id}`} className="mb-8 last:mb-0 group">
+                                    <div className="relative overflow-hidden rounded-xl mb-4">
+                                      <div className="aspect-video relative">
+                                        <Image
+                                          src={rec.image || "/placeholder.svg"}
+                                          alt={rec.title}
+                                          fill
+                                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+                                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                                          <div className="flex justify-between items-end">
+                                            <div>
+                                              <Badge className="bg-[#84BC54] hover:bg-[#84BC54]/90 mb-2">
+                                                {course.level}
+                                              </Badge>
+                                              <h3 className="text-xl font-bold text-white group-hover:text-[#84BC54] transition-colors">
+                                                {rec.title}
+                                              </h3>
+                                            </div>
+                                            <div className="flex items-center gap-1 text-white/90 bg-black/30 px-3 py-1 rounded-full">
+                                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                              <span className="font-medium">{rec.rating}</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-3 gap-4">
+                                      <div className="md:col-span-2">
+                                        <p className="text-[#070823] mb-3">{rec.description}</p>
+                                        <p className="text-[#070823] text-sm">{rec.details}</p>
+                                      </div>
+
+                                      <div className="space-y-3">
+                                        <div className="flex items-center gap-2 text-[#7C7D87]">
+                                          <Clock className="w-4 h-4 text-[#84BC54]" />
+                                          <span>{rec.duration}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-[#7C7D87]">
+                                          <Users2 className="w-4 h-4 text-[#84BC54]" />
+                                          <span>{rec.students.toLocaleString()} students</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-[#7C7D87]">
+                                          <User className="w-4 h-4 text-[#84BC54]" />
+                                          <span>{rec.instructor}</span>
+                                        </div>
+
+                                        <a
+                                          href={rec.externalUrl || "#"}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="block w-full mt-4"
+                                        >
+                                          <Button className="w-full bg-[#84BC54]/10 hover:bg-[#84BC54]/20 text-[#84BC54] border-none">
+                                            View Course <ArrowRight className="w-4 h-4 ml-2" />
+                                          </Button>
+                                        </a>
+                                      </div>
+                                    </div>
+
+                                    {idx < recommendedCourses[course.level].length - 1 && (
+                                      <div className="h-px bg-gray-200 my-8" />
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
-                            className="bg-[#84BC54] text-white hover:bg-[#84BC54]/90 border-none text-sm px-3 py-1 h-auto rounded-full"
+                            className="border-[#84BC54] text-[#84BC54] hover:bg-[#84BC54]/10 hover:text-[#84BC54] rounded-full px-6"
+                            onClick={() => setSelectedCourse(course)}
                           >
-                            Recommended Courses
+                            Learn More <ArrowRight className="w-4 h-4 ml-1" />
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[600px]">
-                          <DialogHeader>
-                            <DialogTitle className="text-lg font-bold">
-                              Recommended for {course.level}
-                            </DialogTitle>
-                            <DialogDescription>Courses that complement {course.title}</DialogDescription>
-                          </DialogHeader>
-                          <div className="grid gap-4 mt-4">
-                            {recommendedCourses[course.level]?.map((rec, idx) => (
-                              <div
-                                key={idx}
-                                className="border border-[#84BC54]/20 p-4 rounded-lg hover:bg-[#D4EBC1]/20 transition-all duration-300 cursor-pointer group relative overflow-hidden"
-                                onClick={() =>
-                                  (window.location.href = `/courses/${rec.title.toLowerCase().replace(/\s+/g, "-")}`)
-                                }
-                              >
-                                <div className="flex gap-4">
-                                  <div className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0">
-                                    <Image
-                                      src={rec.image || "/placeholder.svg"}
-                                      alt={rec.title}
-                                      width={80}
-                                      height={80}
-                                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                  </div>
-                                  <div className="flex-1">
-                                    <div className="flex justify-between items-start">
-                                      <h4 className="font-medium text-[#070823] group-hover:text-[#84BC54] transition-colors">
-                                        {rec.title}
-                                      </h4>
-                                      <span className="text-sm text-[#7C7D87]">{rec.duration}</span>
-                                    </div>
-                                    <p className="text-sm text-[#7C7D87] mt-1">{rec.description}</p>
-
-                                    <div className="flex items-center mt-2 text-sm text-[#7C7D87]">
-                                      <span className="flex items-center">
-                                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
-                                        {rec.rating}
-                                      </span>
-                                      <span className="mx-2">•</span>
-                                      <span>{rec.students} students</span>
-                                      <span className="mx-2">•</span>
-                                      <span>Instructor: {rec.instructor}</span>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Expanded details on hover */}
-                                <div className="max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-24 mt-0 group-hover:mt-3 opacity-0 group-hover:opacity-100">
-                                  <p className="text-sm text-[#070823]">{rec.details}</p>
-                                  <div className="flex justify-end mt-2">
-                                    <span className="text-[#84BC54] text-sm font-medium flex items-center">
-                                      View Course <ChevronRight className="w-4 h-4 ml-1" />
-                                    </span>
-                                  </div>
+                        <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
+                          <div className="max-h-[80vh] overflow-y-auto">
+                            {/* Course Header */}
+                            <div className="relative h-48 md:h-64">
+                              <Image
+                                src={course.image || "/placeholder.svg"}
+                                alt={course.title}
+                                fill
+                                className="object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30" />
+                              <div className="absolute bottom-0 left-0 right-0 p-6">
+                                <Badge className="bg-[#84BC54] hover:bg-[#84BC54]/90 mb-3">{course.level}</Badge>
+                                <h2 className="text-2xl md:text-3xl font-bold text-white">{course.title}</h2>
+                                <div className="flex items-center gap-2 text-white/80 text-sm mt-2">
+                                  <Clock className="w-4 h-4" />
+                                  <span>{course.duration}</span>
+                                  <span className="mx-1">•</span>
+                                  <Users2 className="w-4 h-4" />
+                                  <span>{course.students.toLocaleString()} students</span>
                                 </div>
                               </div>
-                            ))}
+                            </div>
+
+                            {/* Course Details */}
+                            <div className="p-6">
+                              <Tabs defaultValue="overview" className="w-full">
+                                <TabsList className="grid grid-cols-4 mb-6">
+                                  <TabsTrigger value="overview">Overview</TabsTrigger>
+                                  <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
+                                  <TabsTrigger value="instructors">Instructors</TabsTrigger>
+                                  <TabsTrigger value="faq">FAQ</TabsTrigger>
+                                </TabsList>
+
+                                <TabsContent value="overview" className="space-y-6">
+                                  <div>
+                                    <h3 className="text-lg font-semibold text-[#070823] mb-2">About This Course</h3>
+                                    <p className="text-[#7C7D87]">{course.description}</p>
+                                  </div>
+
+                                  <div className="grid md:grid-cols-2 gap-6">
+                                    <div className="bg-[#F9F9F9] p-4 rounded-lg">
+                                      <h4 className="font-medium text-[#070823] mb-3 flex items-center gap-2">
+                                        <Calendar className="w-4 h-4 text-[#84BC54]" />
+                                        Schedule
+                                      </h4>
+                                      <p className="text-[#7C7D87]">{course.schedule}</p>
+                                    </div>
+
+                                    <div className="bg-[#F9F9F9] p-4 rounded-lg">
+                                      <h4 className="font-medium text-[#070823] mb-3 flex items-center gap-2">
+                                        <GraduationCap className="w-4 h-4 text-[#84BC54]" />
+                                        Prerequisites
+                                      </h4>
+                                      <ul className="text-[#7C7D87] space-y-1">
+                                        {course.prerequisites.map((prereq, i) => (
+                                          <li key={i} className="flex items-start gap-2">
+                                            <span className="text-[#84BC54] mt-1">•</span>
+                                            <span>{prereq}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <div>
+                                    <h3 className="text-lg font-semibold text-[#070823] mb-3">What You'll Learn</h3>
+                                    <div className="grid md:grid-cols-2 gap-3">
+                                      {course.outcomes.map((outcome, i) => (
+                                        <div key={i} className="flex items-start gap-2">
+                                          <CheckCircle className="w-5 h-5 text-[#84BC54] flex-shrink-0 mt-0.5" />
+                                          <span className="text-[#7C7D87]">{outcome}</span>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  {/* Testimonial */}
+                                  <div className="bg-[#84BC54]/10 p-5 rounded-lg border border-[#84BC54]/20">
+                                    <div className="flex flex-col items-center text-center">
+                                      <p className="text-[#070823] italic mb-4">"{course.testimonial.quote}"</p>
+                                      <p className="font-semibold text-[#070823]">{course.testimonial.author}</p>
+                                      <p className="text-sm text-[#7C7D87]">{course.testimonial.role}</p>
+                                    </div>
+                                  </div>
+
+                                  <div className="flex justify-center pt-4">
+                                    <Button className="bg-[#84BC54] hover:bg-[#84BC54]/90 text-white rounded-full px-8 py-6">
+                                      Enroll Now <ArrowRight className="w-4 h-4 ml-2" />
+                                    </Button>
+                                  </div>
+                                </TabsContent>
+
+                                <TabsContent value="curriculum" className="space-y-6">
+                                  <h3 className="text-lg font-semibold text-[#070823] mb-4">Course Projects</h3>
+                                  <div className="space-y-4">
+                                    {course.projects.map((project, i) => (
+                                      <div key={i} className="bg-[#F9F9F9] p-4 rounded-lg">
+                                        <div className="flex items-start gap-3">
+                                          <div className="bg-[#84BC54]/20 p-2 rounded-full">
+                                            <FileText className="w-5 h-5 text-[#84BC54]" />
+                                          </div>
+                                          <div>
+                                            <h4 className="font-medium text-[#070823]">Project {i + 1}</h4>
+                                            <p className="text-[#7C7D87]">{project}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  <div className="flex justify-center pt-4">
+                                    <Button className="bg-[#84BC54] hover:bg-[#84BC54]/90 text-white rounded-full px-8 py-6">
+                                      Enroll Now <ArrowRight className="w-4 h-4 ml-2" />
+                                    </Button>
+                                  </div>
+                                </TabsContent>
+
+                                <TabsContent value="instructors" className="space-y-6">
+                                  <h3 className="text-lg font-semibold text-[#070823] mb-4">Meet Your Instructors</h3>
+                                  <div className="grid gap-6">
+                                    {course.instructors.map((instructor, i) => {
+                                      // Find the instructor in the team data
+                                      // Define instructor data type that matches the team member structure
+                                      type InstructorData = {
+                                        name: string;
+                                        role: string;
+                                        bio: string;
+                                        specialties: string[];
+                                        image: string;
+                                      };
+                                      
+                                      let instructorData: InstructorData | null = null;
+                                      
+                                      // Loop through all team categories to find the instructor
+                                      for (const category of Object.values(team)) {
+                                        const found = category.find((member) => member.name === instructor);
+                                        if (found) {
+                                          instructorData = {
+                                            name: found.name,
+                                            role: found.role,
+                                            bio: found.bio,
+                                            specialties: found.specialties,
+                                            image: found.image
+                                          };
+                                          break;
+                                        }
+                                      }
+
+                                      return (
+                                        <div key={i} className="bg-[#F9F9F9] p-4 rounded-lg">
+                                          <div className="flex items-center gap-4">
+                                            <Image
+                                              src={instructorData?.image || "/placeholder.svg"}
+                                              alt={instructor}
+                                              width={64}
+                                              height={64}
+                                              className="rounded-full"
+                                            />
+                                            <div>
+                                              <h4 className="font-medium text-[#070823]">{instructor}</h4>
+                                              <p className="text-[#84BC54]">{instructorData?.role || "Instructor"}</p>
+                                              {instructorData && (
+                                                <p className="text-[#7C7D87] text-sm mt-1">{instructorData.bio}</p>
+                                              )}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+
+                                  <div className="flex justify-center pt-4">
+                                    <Button className="bg-[#84BC54] hover:bg-[#84BC54]/90 text-white rounded-full px-8 py-6">
+                                      Enroll Now <ArrowRight className="w-4 h-4 ml-2" />
+                                    </Button>
+                                  </div>
+                                </TabsContent>
+
+                                <TabsContent value="faq" className="space-y-6">
+                                  <h3 className="text-lg font-semibold text-[#070823] mb-4">
+                                    Frequently Asked Questions
+                                  </h3>
+                                  <div className="space-y-4">
+                                    {course.faqs.map((faq, i) => (
+                                      <div key={i} className="bg-[#F9F9F9] p-4 rounded-lg">
+                                        <h4 className="font-medium text-[#070823] mb-2">{faq.question}</h4>
+                                        <p className="text-[#7C7D87]">{faq.answer}</p>
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  <div className="flex justify-center pt-4">
+                                    <Button className="bg-[#84BC54] hover:bg-[#84BC54]/90 text-white rounded-full px-8 py-6">
+                                      Enroll Now <ArrowRight className="w-4 h-4 ml-2" />
+                                    </Button>
+                                  </div>
+                                </TabsContent>
+                              </Tabs>
+                            </div>
                           </div>
                         </DialogContent>
                       </Dialog>
                     </div>
                   </div>
-                </div>
-
-                <div className="p-6">
-                  <p className="text-[#070823] mb-4">{course.description}</p>
-
-                  {/* Progress Bar */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-[#070823]">Program Rating</span>
-                      <span className="text-[#84BC54]">{course.progress}%</span>
-                    </div>
-                    <div className="h-2 bg-[#84BC54]/20 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${course.progress}%` }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full bg-[#84BC54]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 mb-4">
-                    <h4 className="font-semibold text-[#070823]">Key Topics:</h4>
-                    <ul className="grid grid-cols-2 gap-2">
-                      {course.topics.map((topic, i) => (
-                        <li key={i} className="text-sm text-[#7C7D87]">
-                          • {topic}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* <button className="w-full text-center bg-[#84BC54] text-white py-2 rounded-full hover:bg-[#84BC54]/90 transition-colors">
-                    Learn More
-                  </button> */}
                 </div>
               </motion.div>
             ))}
@@ -1019,3 +1605,4 @@ export default function Home() {
     </div>
   )
 }
+
