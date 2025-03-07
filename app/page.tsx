@@ -661,81 +661,151 @@ export default function Home() {
 
       {/* Courses Section */}
       {/* Courses Section */}
-      <section id="courses" className="py-20 bg-[#D4EBC1]">
+      <section id="courses" className="py-24 bg-gradient-to-b from-[#D4EBC1] to-[#E8F5DE]">
         <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl font-bold text-center text-[#070823] mb-12"
-          >
-            Explore Our Program Catalog
-          </motion.h2>
+          <div className="text-center mb-16">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-[#84BC54] font-medium inline-block mb-2 px-4 py-1 bg-[#84BC54]/10 rounded-full text-sm"
+            >
+              Educational Excellence
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-5xl font-bold text-[#070823] mb-4"
+            >
+              Explore Our Program Catalog
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="max-w-2xl mx-auto text-[#4A4B57] text-lg"
+            >
+              Discover courses designed to elevate your skills and advance your career with industry-relevant content
+            </motion.p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10 }}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)"
+                }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden group"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden group border border-gray-100"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   <Image
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-white/90 text-[#070823] text-xs font-medium px-3 py-1 rounded-full">
+                      {course.duration}
+                    </span>
+                  </div>
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-xl font-semibold text-white mb-2">{course.title}</h3>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80 text-sm">{course.duration}</span>
-                      <Link
-                        href="recommended-courses"
-                        className="bg-[#84BC54] text-white hover:bg-[#84BC54]/90 border-none text-sm px-3 py-1 h-auto rounded-full inline-flex items-center"
-                      >
-                        Recommended Courses
-                      </Link>
+                    <h3 className="text-2xl font-bold text-white mb-2">{course.title}</h3>
+                    <div className="flex items-center text-white/80 text-sm space-x-3">
+                      <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.328.996.002 1.069c0 .358.186.687.484.87l3.12 1.9 3.382-1.55a1 1 0 00.546-.89v-3.51l2.106-.944a1 1 0 000-1.84l-7-3z"></path>
+                        </svg>
+                        8 Modules
+                      </span>
+                      <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"></path>
+                        </svg>
+                        {course.level || "Intermediate"}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <p className="text-[#070823] mb-4">{course.description}</p>
+                  <p className="text-[#4A4B57] mb-6 text-sm leading-relaxed">{course.description}</p>
 
                   {/* Progress Bar */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-[#070823]">Program Rating</span>
-                      <span className="text-[#84BC54]">{course.progress}%</span>
+                  <div className="mb-6">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-[#070823] font-medium">Program Rating</span>
+                      <span className="text-[#84BC54] font-bold">{course.progress}%</span>
                     </div>
-                    <div className="h-2 bg-[#84BC54]/20 rounded-full overflow-hidden">
+                    <div className="h-2.5 bg-[#F1F5F9] rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${course.progress}%` }}
                         transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full bg-[#84BC54]"
+                        className="h-full bg-gradient-to-r from-[#84BC54] to-[#68A438] rounded-full"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2 mb-4">
-                    <h4 className="font-semibold text-[#070823]">Key Topics:</h4>
+                  <div className="space-y-3 mb-6">
+                    <h4 className="font-semibold text-[#070823] flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-[#84BC54]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zm7-10a1 1 0 01.707.293l.707.707.707-.707A1 1 0 0116 3v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0V6h-1a1 1 0 110-2h1V3a1 1 0 011-1zm-7 4a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0V8H3a1 1 0 110-2h1V5a1 1 0 011-1zm7 0a1 1 0 01.707.293l.707.707.707-.707A1 1 0 0116 7v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1V7a1 1 0 011-1z" clipRule="evenodd"></path>
+                      </svg>
+                      Key Topics:
+                    </h4>
                     <ul className="grid grid-cols-2 gap-2">
                       {course.topics.map((topic, i) => (
-                        <li key={i} className="text-sm text-[#7C7D87]">
-                          • {topic}
+                        <li key={i} className="text-sm text-[#4A4B57] flex items-start">
+                          <svg className="w-4 h-4 mr-1.5 text-[#84BC54] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                          </svg>
+                          {topic}
                         </li>
                       ))}
                     </ul>
+                  </div>
+
+                  {/* Recommended Courses Link */}
+                  <div className="mt-4 text-left">
+                    <Link
+                      href="recommended-courses"
+                      className="bg-[#84BC54] text-white hover:bg-[#68A438] transition-colors duration-300 border-none text-sm px-5 py-2.5 rounded-full inline-flex items-center font-medium shadow-sm hover:shadow-md"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"></path>
+                      </svg>
+                      Recommended Courses
+                    </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-16 text-center"
+          >
+            <Link
+              href="/all-courses"
+              className="inline-flex items-center text-[#070823] font-semibold hover:text-[#84BC54] transition-colors duration-300"
+            >
+              View All Programs
+              <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+              </svg>
+            </Link>
+          </motion.div> */}
         </div>
       </section>
 

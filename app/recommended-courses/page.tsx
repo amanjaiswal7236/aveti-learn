@@ -201,6 +201,132 @@ export default function CourseRecommendation() {
                 ],
             },
         },
+        {
+            id: "postgresql-masterclass",
+            title: "SQL and PostgreSQL: The Complete Developer's Guide",
+            duration: "21 hours",
+            description: "Become an expert with SQL and PostgreSQL! Master database design, administration, and performance while building real-world projects",
+            image: "/courses/sql-postgreSQL.webp",
+            instructor: "Stephen Grider",
+            rating: 4.7,
+            students: 53000,
+            price: "$19.99",
+            level: "All Levels",
+            category: "Database",
+            details:
+                "The ultimate course for learning SQL and PostgreSQL, from basic queries to advanced features. Understand how databases work behind the scenes and learn to write efficient queries, design schemas, and implement custom functionality.",
+            link: "/courses/postgresql-masterclass",
+            externalUrl: "https://www.udemy.com/course/sql-and-postgresql/",
+            topics: ["SQL Basics", "Table Design", "Joins", "Aggregations", "Common Table Expressions", "Indexes", "Performance Tuning", "Views", "Schemas", "Advanced PostgreSQL Features"],
+            prerequisites: ["No prior SQL or database experience required", "Basic programming concepts helpful but not necessary"],
+            outcomes: [
+                "Write complex SQL queries with confidence",
+                "Design and structure a database",
+                "Implement PostgreSQL-specific features like materialized views and window functions",
+                "Understand indexing and query optimization",
+                "Use transactions and locking for data integrity",
+                "Create internal validation rules to enforce data consistency"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An outstanding course that thoroughly covers both SQL fundamentals and PostgreSQL's unique features with practical, real-world examples.",
+                strengths: [
+                    "Exceptionally clear explanations with visual aids",
+                    "Practical approach with real-world scenarios",
+                    "Deep dive into PostgreSQL-specific features",
+                    "Strong focus on performance optimization",
+                    "Excellent coverage of database design principles"
+                ],
+                weaknesses: [
+                    "Limited coverage of database administration topics",
+                    "Could include more on cloud deployment considerations",
+                    "Some advanced security topics could be expanded"
+                ],
+                idealFor: [
+                    "Web developers needing database skills",
+                    "Data analysts looking to improve query writing",
+                    "Backend engineers working with PostgreSQL",
+                    "Anyone transitioning to database-focused roles"
+                ],
+                howToUse: [
+                    "Set up a local PostgreSQL environment to follow along",
+                    "Write and test every query shown in the course",
+                    "Create your own database project as you progress",
+                    "Practice explaining query execution plans",
+                    "Apply performance optimizations to your own queries"
+                ],
+                complementaryCourses: [
+                    "Database Design and Normalization",
+                    "Node.js with PostgreSQL Integration",
+                    "Database DevOps and CI/CD",
+                    "Advanced SQL for Data Analysis"
+                ],
+            },
+        },
+        {
+            id: "linux-fundamentals",
+            title: "Linux Administration: The Complete Linux Bootcamp",
+            duration: "10 weeks",
+            description: "Master Linux from basic commands to advanced system administration, shell scripting, and server management",
+            image: "/courses/linux.webp",
+            instructor: "Imran Afzal",
+            rating: 4.8,
+            students: 1850,
+            price: "$19.99",
+            level: "Beginner to Advanced",
+            category: "System Administration",
+            details:
+                "A hands-on Linux course that covers everything from basic terminal commands to advanced system administration. Learn to manage servers, automate tasks with shell scripts, and configure secure Linux environments.",
+            link: "/courses/linux-fundamentals",
+            externalUrl: "https://www.udemy.com/course/linux-administration-bootcamp/",
+            topics: ["Terminal Basics", "File System", "User Management", "Permissions", "Process Management", "Shell Scripting", "Package Management", "Networking", "Security", "Service Configuration"],
+            prerequisites: ["Basic computer knowledge", "No prior Linux experience required"],
+            outcomes: [
+                "Navigate and manage Linux systems with confidence",
+                "Write efficient shell scripts for automation",
+                "Configure and secure Linux servers",
+                "Implement system monitoring and maintenance",
+                "Troubleshoot common Linux problems",
+                "Deploy and manage web servers and databases"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An excellent practical introduction to Linux that builds progressively from basics to advanced administrative tasks.",
+                strengths: [
+                    "Practical, command-line focused approach",
+                    "Comprehensive coverage of essential Linux skills",
+                    "Excellent real-world scenarios and examples",
+                    "Strong focus on security and best practices",
+                    "Applicable across various Linux distributions"
+                ],
+                weaknesses: [
+                    "Could include more on containerization with Docker",
+                    "Limited coverage of advanced networking concepts",
+                    "Some cloud-specific Linux topics could be expanded"
+                ],
+                idealFor: [
+                    "Aspiring system administrators",
+                    "Developers needing stronger Linux skills",
+                    "IT professionals transitioning to Linux environments",
+                    "DevOps engineers building their foundational knowledge"
+                ],
+                howToUse: [
+                    "Set up a virtual machine or dual-boot to practice",
+                    "Type every command yourself rather than copy-pasting",
+                    "Create your own challenge scenarios to solve",
+                    "Build a personal Linux server project as you learn",
+                    "Document commands and configurations in your own cheat sheet"
+                ],
+                complementaryCourses: [
+                    "Shell Scripting: Automation for System Administrators",
+                    "Docker and Kubernetes on Linux",
+                    "Linux Security Essentials",
+                    "DevOps with Linux"
+                ],
+            },
+        },
     ]
 
     const selectedCourse = recommendedCourses.find((course) => course.id === selectedCourseId) || recommendedCourses[0]
