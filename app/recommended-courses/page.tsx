@@ -327,6 +327,470 @@ export default function CourseRecommendation() {
                 ],
             },
         },
+        {
+            id: "nvidia-gpu-fundamentals",
+            title: "Fundamentals of Accelerated Computing with CUDA Python",
+            duration: "8 hours",
+            description: "Learn the fundamentals of accelerating Python applications with NVIDIA GPUs and the CUDA programming model",
+            image: "/courses/cuda.jpg",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.7,
+            students: 2100,
+            price: "Free",
+            level: "Intermediate",
+            category: "Programming",
+            details:
+                "Learn how to accelerate Python applications with NVIDIA GPUs using Numba, a just-in-time, accelerated Python compiler, and the CUDA programming model. Gain hands-on experience optimizing and accelerating Python code for high-performance computing.",
+            link: "/courses/nvidia-gpu-fundamentals",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-07+V1",
+            topics: ["GPU Programming", "CUDA Python", "Numba", "Parallel Computing", "Performance Optimization", "Accelerated Computing", "Scientific Computing"],
+            prerequisites: ["Basic Python knowledge", "Understanding of programming fundamentals", "Familiarity with NumPy is helpful"],
+            outcomes: [
+                "Accelerate Python applications using NVIDIA GPUs",
+                "Use Numba to compile Python code for the GPU",
+                "Implement parallel algorithms with CUDA Python",
+                "Understand and apply performance optimization techniques",
+                "Solve real-world computational problems using GPU acceleration"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An excellent introduction to GPU programming with Python that makes parallel computing accessible without requiring C/C++ knowledge.",
+                strengths: [
+                    "Hands-on approach with practical exercises",
+                    "Clear explanations of GPU computing concepts",
+                    "Uses Python instead of lower-level languages for accessibility",
+                    "Real-world performance comparisons between CPU and GPU implementations",
+                    "Covers both basic and advanced optimization techniques"
+                ],
+                weaknesses: [
+                    "Limited coverage of more advanced CUDA features",
+                    "Could include more on multi-GPU programming",
+                    "Some sections assume more mathematical background than stated"
+                ],
+                idealFor: [
+                    "Data scientists looking to accelerate numerical computations",
+                    "Python developers working with computation-heavy applications",
+                    "Machine learning practitioners wanting to understand GPU acceleration",
+                    "Scientific computing professionals seeking performance improvements"
+                ],
+                howToUse: [
+                    "Complete all hands-on exercises on a system with an NVIDIA GPU",
+                    "Compare performance benchmarks on your own hardware",
+                    "Start with simple algorithms before moving to complex implementations",
+                    "Create your own parallel versions of common algorithms as practice",
+                    "Apply the techniques to your existing Python projects to measure gains"
+                ],
+                complementaryCourses: [
+                    "CUDA C/C++ Fundamentals",
+                    "Accelerating Data Science with GPU Computing",
+                    "Deep Learning Fundamentals",
+                    "High-Performance Python for Scientific Computing"
+                ],
+            },
+        },
+        {
+            id: "nvidia-ai-for-all",
+            title: "AI for All: From Basics to GenAI Practice",
+            duration: "20 hours",
+            description: "Learn the fundamentals of AI and gain practical experience with generative AI through hands-on labs",
+            image: "/courses/nvidia.webp",
+            instructor: "NVIDIA Academy",
+            rating: 4.8,
+            students: 3200,
+            price: "Free",
+            level: "Beginner to Intermediate",
+            category: "Artificial Intelligence",
+            details:
+                "A comprehensive introduction to artificial intelligence that takes you from core concepts to practical applications in generative AI. Develop a strong foundation in AI principles and gain hands-on experience with cutting-edge generative models.",
+            link: "/courses/nvidia-ai-for-all",
+            externalUrl: "https://academy.nvidia.com/en/course/ai-for-all-from-basics-to-genai-practice/?cm=81220",
+            topics: ["AI Fundamentals", "Machine Learning", "Deep Learning", "Neural Networks", "Generative AI", "LLMs", "Prompt Engineering", "AI Ethics"],
+            prerequisites: ["Basic computer skills", "No prior AI experience required", "Basic programming concepts helpful but not necessary"],
+            outcomes: [
+                "Understand core AI and machine learning concepts",
+                "Recognize different types of AI applications and their use cases",
+                "Gain practical experience with generative AI models",
+                "Apply effective prompt engineering techniques",
+                "Create and deploy simple AI-powered applications",
+                "Evaluate ethical considerations in AI development and deployment"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An accessible and comprehensive introduction to AI that balances theoretical foundations with practical applications in generative AI.",
+                strengths: [
+                    "Excellent progression from basic concepts to advanced applications",
+                    "Hands-on labs that reinforce theoretical knowledge",
+                    "Strong focus on generative AI and its practical uses",
+                    "Clear explanations of complex topics for beginners",
+                    "Up-to-date content covering the latest AI developments"
+                ],
+                weaknesses: [
+                    "Some labs may require more computational resources than available",
+                    "Could include more intermediate programming exercises",
+                    "Limited coverage of MLOps and deployment considerations"
+                ],
+                idealFor: [
+                    "Complete beginners to AI and machine learning",
+                    "Business professionals seeking to understand AI capabilities",
+                    "Students considering AI/ML career paths",
+                    "Developers wanting to integrate generative AI into applications",
+                    "Educators looking to incorporate AI concepts into curriculum"
+                ],
+                howToUse: [
+                    "Complete all conceptual modules before attempting hands-on labs",
+                    "Practice prompt engineering techniques with various models",
+                    "Form study groups to discuss ethical considerations and applications",
+                    "Create a personal project applying course concepts",
+                    "Document your learning journey and build a portfolio of examples"
+                ],
+                complementaryCourses: [
+                    "Practical Deep Learning for Coders",
+                    "Prompt Engineering for Developers",
+                    "Introduction to PyTorch",
+                    "Ethics in Artificial Intelligence",
+                    "Building Applications with LLMs"
+                ],
+            },
+        },
+        {
+            id: "nvidia-jetson-nano",
+            title: "Getting Started with AI on Jetson Nano",
+            duration: "8 hours",
+            description: "Learn how to build and deploy AI applications on the NVIDIA Jetson Nano platform for edge computing and robotics",
+            image: "/courses/jetson.png",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.6,
+            students: 2800,
+            price: "Free",
+            level: "Intermediate",
+            category: "Edge Computing",
+            details:
+                "This hands-on course teaches you how to set up a Jetson Nano and use it for AI applications at the edge. Learn to build and deploy computer vision models, process real-time data from sensors, and create intelligent robotic applications.",
+            link: "/courses/nvidia-jetson-nano",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-RX-02+V2",
+            topics: ["Edge Computing", "Computer Vision", "Jetson Nano", "Deep Learning", "IoT", "Robotics", "Real-time AI", "Model Deployment"],
+            prerequisites: ["Basic Python knowledge", "Understanding of Linux commands", "Familiarity with deep learning concepts", "Jetson Nano hardware (recommended)"],
+            outcomes: [
+                "Set up and configure a Jetson Nano for AI workloads",
+                "Deploy pre-trained models for image classification and object detection",
+                "Process real-time video streams for AI applications",
+                "Optimize neural networks for edge performance",
+                "Integrate sensors for real-world data collection",
+                "Build end-to-end AI applications for edge use cases"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An excellent practical course for those interested in edge AI and robotics, providing hands-on experience with real hardware and software tools.",
+                strengths: [
+                    "Practical, project-based learning approach",
+                    "Real-world applications in robotics and IoT",
+                    "Hands-on experience with actual hardware",
+                    "Excellent introduction to edge computing concepts",
+                    "Clear progression from basic setup to complete applications"
+                ],
+                weaknesses: [
+                    "Requires Jetson Nano hardware for optimal experience",
+                    "Limited coverage of advanced deployment scenarios",
+                    "Some projects would benefit from more troubleshooting guidance"
+                ],
+                idealFor: [
+                    "Robotics enthusiasts and makers",
+                    "IoT developers working on smart devices",
+                    "Computer vision practitioners",
+                    "Embedded systems engineers",
+                    "Students exploring edge AI applications"
+                ],
+                howToUse: [
+                    "Acquire a Jetson Nano device before starting the course",
+                    "Set up a dedicated workspace for hardware experiments",
+                    "Follow each project completely before moving to the next",
+                    "Document challenges and solutions during the setup process",
+                    "Extend the provided projects with your own sensors or use cases",
+                    "Join the Jetson community forums for additional support"
+                ],
+                complementaryCourses: [
+                    "Fundamentals of Deep Learning",
+                    "Computer Vision with OpenCV",
+                    "Embedded Linux Programming",
+                    "ROS (Robot Operating System) Basics",
+                    "TensorRT for Deep Learning Inference"
+                ],
+            },
+        },
+        {
+            id: "nvidia-deep-learning-fundamentals",
+            title: "Fundamentals of Deep Learning",
+            duration: "8 hours",
+            description: "Learn the foundations of deep learning and neural networks using PyTorch, from basic concepts to training your own models",
+            image: "/courses/deep.jpg",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.8,
+            students: 5600,
+            price: "Free",
+            level: "Beginner to Intermediate",
+            category: "Artificial Intelligence",
+            details:
+                "A comprehensive introduction to deep learning that covers neural network fundamentals, training methodologies, and practical implementation using PyTorch. Build and train neural networks for image classification while understanding key concepts in modern AI.",
+            link: "/courses/nvidia-deep-learning-fundamentals",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-FX-01+V1",
+            topics: ["Neural Networks", "PyTorch", "Deep Learning", "Convolutional Neural Networks", "Model Training", "Image Classification", "Transfer Learning", "GPU Acceleration"],
+            prerequisites: ["Basic Python programming", "Understanding of basic linear algebra", "Familiarity with machine learning concepts (helpful but not required)"],
+            outcomes: [
+                "Understand the fundamental concepts of deep learning",
+                "Implement neural networks using PyTorch",
+                "Train models for image classification tasks",
+                "Apply transfer learning to improve model performance",
+                "Utilize GPU acceleration for deep learning workflows",
+                "Evaluate and improve model performance",
+                "Deploy trained models for inference"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An excellent entry point to deep learning that balances theoretical understanding with practical implementation, providing a solid foundation for more advanced topics.",
+                strengths: [
+                    "Clear explanations of complex neural network concepts",
+                    "Hands-on approach with PyTorch implementation",
+                    "Well-structured progression from basics to practical applications",
+                    "Effective use of visual aids to explain network architectures",
+                    "Practical focus on GPU acceleration for performance"
+                ],
+                weaknesses: [
+                    "Could include more coverage of recent architectures like transformers",
+                    "Limited exploration of natural language processing applications",
+                    "Some advanced optimization techniques are only briefly covered"
+                ],
+                idealFor: [
+                    "Software developers new to AI and deep learning",
+                    "Data scientists transitioning to deep learning",
+                    "Computer science students specializing in AI",
+                    "Technical professionals seeking practical deep learning skills",
+                    "Researchers beginning work with neural networks"
+                ],
+                howToUse: [
+                    "Set up a GPU-enabled environment before starting",
+                    "Complete all coding exercises to reinforce concepts",
+                    "Build the example models from scratch without looking at solutions first",
+                    "Experiment with hyperparameter tuning to understand their effects",
+                    "Apply the techniques to a personal project after completing the course",
+                    "Revisit challenging concepts with supplementary resources"
+                ],
+                complementaryCourses: [
+                    "Computer Vision with Deep Learning",
+                    "Natural Language Processing with Transformers",
+                    "Advanced PyTorch Techniques",
+                    "Deep Learning for Time Series Data",
+                    "MLOps: Deploying AI Models at Scale"
+                ],
+            },
+        },
+        {
+            id: "nvidia-rapids-data-science",
+            title: "Accelerating Data Science Workflows with RAPIDS",
+            duration: "8 hours",
+            description: "Learn how to accelerate end-to-end data science workflows using NVIDIA RAPIDS, enabling GPU acceleration for data preparation, model training, and visualization",
+            image: "/courses/rapids.webp",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.7,
+            students: 2400,
+            price: "Free",
+            level: "Intermediate",
+            category: "Data Science",
+            details:
+                "This course teaches you how to accelerate your entire data science pipeline using NVIDIA's RAPIDS suite of open-source libraries. Learn to leverage GPU acceleration for data preprocessing, feature engineering, model training, and visualization to achieve orders of magnitude speedup over CPU-only workflows.",
+            link: "/courses/nvidia-rapids-data-science",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-IV-02+V2",
+            topics: ["RAPIDS", "GPU-Accelerated Data Science", "cuDF", "cuML", "Data Preprocessing", "Machine Learning", "XGBoost", "Data Visualization", "Big Data Processing"],
+            prerequisites: ["Python programming experience", "Familiarity with pandas and scikit-learn", "Basic understanding of machine learning concepts", "Experience with data analysis workflows"],
+            outcomes: [
+                "Accelerate data preprocessing using GPU-based DataFrame operations",
+                "Implement GPU-accelerated machine learning algorithms",
+                "Leverage RAPIDS for end-to-end data science pipelines",
+                "Visualize large datasets efficiently with GPU acceleration",
+                "Process and analyze datasets too large for CPU memory",
+                "Achieve significant speedups compared to CPU-only workflows",
+                "Deploy optimized machine learning models for inference"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An excellent course for data scientists looking to overcome performance bottlenecks, offering practical techniques to accelerate every stage of the data science workflow.",
+                strengths: [
+                    "Comprehensive coverage of the entire data science pipeline",
+                    "Impressive performance comparisons between CPU and GPU implementations",
+                    "Practical focus on real-world, large-scale datasets",
+                    "Seamless integration with familiar Python data science tools",
+                    "Hands-on approach with reproducible examples"
+                ],
+                weaknesses: [
+                    "Requires NVIDIA GPU hardware for practical implementation",
+                    "Some advanced RAPIDS features are only briefly covered",
+                    "Limited coverage of deployment strategies for production environments"
+                ],
+                idealFor: [
+                    "Data scientists working with large datasets",
+                    "Machine learning engineers facing performance bottlenecks",
+                    "Data analysts needing faster exploratory data analysis",
+                    "Organizations looking to optimize data science infrastructure",
+                    "Researchers processing massive scientific or financial datasets"
+                ],
+                howToUse: [
+                    "Ensure access to NVIDIA GPU hardware before starting",
+                    "Benchmark your current workflows to measure improvements",
+                    "Apply techniques incrementally to existing projects",
+                    "Focus on the stages of your pipeline with the biggest bottlenecks",
+                    "Document performance improvements for different operations",
+                    "Create a migration plan for existing pandas/scikit-learn code"
+                ],
+                complementaryCourses: [
+                    "Fundamentals of Accelerated Computing with CUDA Python",
+                    "Distributed Data Processing with Dask",
+                    "Deep Learning for Tabular Data",
+                    "Big Data Processing with Apache Spark",
+                    "Advanced Machine Learning Optimization Techniques"
+                ],
+            },
+        },
+        {
+            id: "nvidia-deepstream-video-ai",
+            title: "Building Video AI Applications at the Edge with NVIDIA DeepStream",
+            duration: "8 hours",
+            description: "Learn to build scalable video analytics applications using the NVIDIA DeepStream SDK for real-time AI inferencing at the edge",
+            image: "/courses/rag.jpg",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.6,
+            students: 1800,
+            price: "Free",
+            level: "Intermediate to Advanced",
+            category: "Computer Vision",
+            details:
+                "This hands-on course teaches you how to develop efficient video analytics applications using NVIDIA's DeepStream SDK. Learn to deploy AI models for real-time video understanding, optimize performance on edge devices, and build end-to-end intelligent video analytics pipelines.",
+            link: "/courses/nvidia-deepstream-video-ai",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-15+V1",
+            topics: ["DeepStream SDK", "Video Analytics", "Edge AI", "Computer Vision", "Real-time Inferencing", "Multi-stream Processing", "AI Model Deployment", "Intelligent Video Analysis"],
+            prerequisites: ["Programming experience in Python or C/C++", "Basic understanding of deep learning concepts", "Familiarity with computer vision applications", "Experience with Linux environments"],
+            outcomes: [
+                "Build end-to-end video analytics applications with DeepStream",
+                "Deploy multiple AI models in a single efficient pipeline",
+                "Process multiple video streams simultaneously in real-time",
+                "Optimize AI inferencing for edge devices",
+                "Integrate metadata and analytics into video processing workflows",
+                "Develop custom plugins for specialized video processing needs",
+                "Scale applications from edge devices to cloud deployments"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "An advanced and practical course that bridges the gap between computer vision models and production-ready video analytics applications at scale.",
+                strengths: [
+                    "Comprehensive coverage of the full DeepStream pipeline",
+                    "Practical approach to real-world video analytics challenges",
+                    "Focus on performance optimization for resource-constrained devices",
+                    "Integration of multiple AI models in efficient pipelines",
+                    "Emphasis on scalable, production-quality solutions"
+                ],
+                weaknesses: [
+                    "Steep learning curve for those new to video processing",
+                    "Requires NVIDIA GPU hardware for hands-on exercises",
+                    "Some sections could provide more troubleshooting guidance",
+                    "Limited coverage of custom model training integration"
+                ],
+                idealFor: [
+                    "Computer vision engineers building production applications",
+                    "Edge computing developers focusing on video analytics",
+                    "IoT solution architects integrating intelligent video",
+                    "Smart city and industrial vision system developers",
+                    "Security and surveillance application developers"
+                ],
+                howToUse: [
+                    "Set up a development environment with compatible NVIDIA hardware",
+                    "Work through examples incrementally to understand the full pipeline",
+                    "Create a personal project that solves a specific video analytics problem",
+                    "Benchmark performance on your target deployment hardware",
+                    "Experiment with different models to understand performance tradeoffs",
+                    "Join the DeepStream community for ongoing support"
+                ],
+                complementaryCourses: [
+                    "Getting Started with AI on Jetson Nano",
+                    "Fundamentals of Deep Learning",
+                    "Computer Vision with TensorRT Optimization",
+                    "Edge AI Development with NVIDIA Triton",
+                    "Real-time Streaming Analytics Architecture"
+                ],
+            },
+        },
+        {
+            id: "nvidia-llm-applications",
+            title: "Applications of Large Language Models",
+            duration: "8 hours",
+            description: "Learn to deploy, optimize, and integrate large language models (LLMs) into real-world applications",
+            image: "/courses/llm.jpg",
+            instructor: "NVIDIA Deep Learning Institute",
+            rating: 4.8,
+            students: 3100,
+            price: "Free",
+            level: "Intermediate",
+            category: "Natural Language Processing",
+            details:
+                "This course provides hands-on experience with deploying and using large language models for various applications. Learn about model deployment, prompt engineering, fine-tuning, and integration of LLMs into practical applications across different domains.",
+            link: "/courses/nvidia-llm-applications",
+            externalUrl: "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
+            topics: ["Large Language Models", "Prompt Engineering", "LLM Fine-tuning", "Retrieval-Augmented Generation", "NLP Applications", "LLM Optimization", "Inference Deployment", "Model Evaluation"],
+            prerequisites: ["Python programming experience", "Basic understanding of deep learning concepts", "Familiarity with natural language processing", "Experience with PyTorch or similar framework (helpful)"],
+            outcomes: [
+                "Deploy large language models efficiently using NVIDIA technologies",
+                "Design effective prompts for various LLM applications",
+                "Implement retrieval-augmented generation for knowledge-intensive tasks",
+                "Fine-tune models for specific domains and applications",
+                "Optimize LLM inference for production environments",
+                "Evaluate and benchmark LLM performance",
+                "Build end-to-end applications leveraging LLMs"
+            ],
+            schedule: "Self-paced",
+            ourTake: {
+                summary:
+                    "A practical and timely course that bridges the gap between theoretical understanding of LLMs and their real-world implementation across diverse applications.",
+                strengths: [
+                    "Hands-on approach to working with state-of-the-art language models",
+                    "Strong focus on practical deployment and optimization techniques",
+                    "Excellent coverage of prompt engineering methodologies",
+                    "Real-world applications across multiple domains",
+                    "Integration with NVIDIA's hardware acceleration stack"
+                ],
+                weaknesses: [
+                    "Requires significant computational resources for some exercises",
+                    "Limited coverage of newest model architectures",
+                    "Could provide more depth on ethical considerations and limitations",
+                    "Some advanced fine-tuning techniques are only briefly covered"
+                ],
+                idealFor: [
+                    "NLP practitioners implementing LLM-based solutions",
+                    "Software engineers building AI-powered applications",
+                    "Data scientists exploring text-based machine learning",
+                    "ML engineers responsible for model deployment",
+                    "Product developers integrating conversational AI features"
+                ],
+                howToUse: [
+                    "Set up a GPU-enabled environment before starting the course",
+                    "Practice prompt engineering techniques across different use cases",
+                    "Create a project applying RAG to a specific knowledge domain",
+                    "Benchmark different optimization approaches on your hardware",
+                    "Join LLM communities to stay current with rapidly evolving techniques",
+                    "Document prompt templates that work well for different applications"
+                ],
+                complementaryCourses: [
+                    "Fundamentals of Deep Learning",
+                    "Building Applications with Generative AI",
+                    "Natural Language Processing with Transformers",
+                    "AI for All: From Basics to GenAI Practice",
+                    "Model Deployment and MLOps"
+                ],
+            },
+        },
+
     ]
 
     const selectedCourse = recommendedCourses.find((course) => course.id === selectedCourseId) || recommendedCourses[0]
